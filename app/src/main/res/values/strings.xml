@@ -6,7 +6,8 @@
     <string name="action_info">Info</string>
     <string name="action_beenden">Beenden</string>
 
-    <string name="VorFamilienname">Vor- und Familienname</string>
+    <string name="nachname">Nachname</string>
+    <string name="vorname">Vorname</string>
     <string name="Email">E-Mail</string>
     <string name="Passwort">Passwort</string>
     <string name="PasswortWdh">Passwort wiederholen</string>
