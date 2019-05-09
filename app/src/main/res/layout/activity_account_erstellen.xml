@@ -82,27 +82,26 @@
                             android:layout_marginEnd="20dp"
                             android:layout_marginRight="20dp"/>
                     <Button
-                            android:text="Erstelle deinen Account"
+                            android:text="@string/erstelleDeinenAccount"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:id="@+id/button11" app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             android:layout_marginTop="32dp"
                             app:layout_constraintTop_toBottomOf="@+id/checkBox" android:background="#47525E"
-                            android:layout_marginLeft="20dp" android:layout_marginStart="20dp"
+                            android:layout_marginStart="20dp"
                             android:layout_marginEnd="20dp"
-                            android:layout_marginRight="20dp"/>
+                    />
                     <Button
-                            android:text="Abbrechen"
+                            android:text="@string/Abbrechen"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:id="@+id/button12" app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             android:layout_marginTop="5dp"
                             app:layout_constraintTop_toBottomOf="@+id/button11" android:background="#47525E"
-                            android:layout_marginLeft="20dp" android:layout_marginStart="20dp"
+                            android:layout_marginStart="20dp"
                             android:layout_marginEnd="20dp"
-                            android:layout_marginRight="20dp"
                             android:onClick="sendMessage"/>
                 </android.support.constraint.ConstraintLayout>
             </LinearLayout>

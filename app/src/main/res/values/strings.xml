@@ -11,4 +11,13 @@
     <string name="Passwort">Passwort</string>
     <string name="PasswortWdh">Passwort wiederholen</string>
     <string name="Datenschutz">Ich stimme den Datenschutzbestimmungen zu</string>
+    <string name="Abbrechen">Abbrechen</string>
+    <string name="erstelleDeinenAccount">Erstelle deinen Account</string>
+    <string name="Login">Login</string>
+    <string name="loginMitFacebook">Login mit Facebook</string>
+    <string name="loginMitTwitter">Login mit Twitter</string>
+    <string name="accountErstellen">Account erstellen</string>
+    <string name="passwortVergessen">Passwort vergessen?</string>
+    <string name="oder">oder</string>
+    <string name="accountErstellen">Account erstellen</string>
 </resources>

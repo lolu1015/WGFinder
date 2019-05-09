@@ -34,9 +34,8 @@
                             android:ems="10"
                             android:id="@+id/editText13" app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            android:hint="E-Mail" android:layout_marginLeft="20dp"
+                            android:hint="@string/Email"
                             android:layout_marginStart="20dp" android:layout_marginEnd="20dp"
-                            android:layout_marginRight="20dp"
                             app:layout_constraintHorizontal_bias="1.0"
                             app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="40dp"/>
                     <EditText
@@ -46,27 +45,26 @@
                             android:ems="10"
                             android:id="@+id/editText14" app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/editText13" android:hint="Passwort"
-                            android:layout_marginLeft="20dp" android:layout_marginStart="20dp"
+                            app:layout_constraintTop_toBottomOf="@+id/editText13" android:hint="@string/Passwort"
+                            android:layout_marginStart="20dp"
                             android:layout_marginEnd="20dp"
-                            android:layout_marginRight="20dp" android:layout_marginTop="20dp"/>
+                            android:layout_marginTop="20dp"/>
                     <Button
-                            android:text="Login"
+                            android:text="@string/Login"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:id="@+id/button7" android:layout_marginEnd="20dp" android:layout_marginRight="20dp"
+                            android:id="@+id/button7" android:layout_marginEnd="20dp"
                             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-                            android:layout_marginLeft="20dp" android:layout_marginStart="20dp"
+                            android:layout_marginStart="20dp"
                             app:layout_constraintTop_toBottomOf="@+id/editText14" android:layout_marginTop="30dp"
                             android:textColor="@android:color/background_light" android:background="#47525E"/>
                     <Button
-                            android:text="Login mit Facebook"
+                            android:text="@string/loginMitFacebook"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:id="@+id/button8"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="20dp"
-                            android:layout_marginRight="20dp" android:layout_marginLeft="20dp"
                             android:layout_marginStart="20dp" android:textColor="@android:color/background_light"
                             android:background="#3C4858"
                             app:layout_constraintHorizontal_bias="1.0"
@@ -74,28 +72,28 @@
                             android:drawableLeft="@drawable/facebook"
                             android:padding="16dp"/>
                     <Button
-                            android:text="Login mit Twitter"
+                            android:text="@string/loginMitTwitter"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:id="@+id/button9" android:layout_marginTop="10dp"
                             app:layout_constraintTop_toBottomOf="@+id/button8"
                             app:layout_constraintStart_toStartOf="parent"
-                            android:layout_marginLeft="20dp" android:layout_marginStart="20dp"
+                            android:layout_marginStart="20dp"
                             app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="20dp"
-                            android:layout_marginRight="20dp" android:textColor="@android:color/background_light"
+                            android:textColor="@android:color/background_light"
                             android:background="#8492A6"
                             android:drawableLeft="@drawable/twitter"
                             android:padding="16dp"/>
                     <Button
-                            android:text="Account erstellen"
+                            android:text="@string/accountErstellen"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:id="@+id/button10" android:layout_marginTop="10dp"
                             app:layout_constraintTop_toBottomOf="@+id/button9"
                             app:layout_constraintStart_toStartOf="parent"
-                            android:layout_marginLeft="20dp" android:layout_marginStart="20dp"
+                            android:layout_marginStart="20dp"
                             app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="20dp"
-                            android:layout_marginRight="20dp" android:textColor="@android:color/background_light"
+                            android:textColor="@android:color/background_light"
                             android:background="#C0CCDA"
                             android:onClick="sendMessage"/>
                     <TextView
