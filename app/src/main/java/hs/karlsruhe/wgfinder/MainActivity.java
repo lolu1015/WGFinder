@@ -4,7 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
+import android.util.Patterns;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,12 +12,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import androidx.appcompat.widget.AppCompatButton;
-import hs.karlsruhe.wgfinder.Entity.Login;
+import androidx.appcompat.widget.AppCompatEditText;
 
-import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private AppCompatButton erstelleAccountButton, loginButton;
+    private AppCompatEditText email, passwort;
     WGFinderRoomDatabase db;
 
     @SuppressLint("WrongViewCast")
@@ -30,6 +30,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         erstelleAccountButton = findViewById(R.id.am_b_AccountErstellen);
         loginButton = findViewById(R.id.am_b_Login);
+        email = findViewById(R.id.am_et_Email);
+        passwort = findViewById(R.id.am_et_Passwort);
+
 
         db = WGFinderRoomDatabase.getDatabase(this);
 
@@ -87,9 +90,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         final String email = ((EditText) findViewById(R.id.am_et_Email)).getText().toString();
         final String passwort = ((EditText) findViewById(R.id.am_et_Passwort)).getText().toString();
-        if(email.equals("") || passwort.equals("")) {
-            Toast.makeText(getApplicationContext(), "Bitte Email oder Passwort eingeben!", Toast.LENGTH_LONG).show();
-        }else {
+        if(validateEmail() & validatePasswort()) {
 
                 AsyncTask.execute(new Runnable() {
                     @Override
@@ -103,7 +104,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                         Toast.makeText(getApplicationContext(), "Anmeldung erfolgt!", Toast.LENGTH_LONG).show();
                                     }
                                 });
-
+                                if (db.benutzerDAO().findBenutzer(email).getRolle() != null) {
+                                    if (db.benutzerDAO().findBenutzer(email).getRolle().equals(1)) {
+                                        // Activity wechseln auf Rolle Sucher
+                                    } else {
+                                        //nicht implementiert
+                                    }
+                                } else {
+                                    wechseleZuRolleAussuchen();
+                                }
                             } else {
                                 runOnUiThread(new Runnable() {
                                     @Override
@@ -126,12 +135,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    private void wechseleZuRolleAussuchen() {
+        Intent intent = new Intent(this,RolleAussuchen.class);
+        startActivity(intent);
+    }
 
 
     public void sendMessage(View view)
     {
         Intent intent = new Intent(this,Account_erstellen.class);
         startActivity(intent);
+    }
+
+    public boolean validateEmail () {
+
+        String emailInput = email.getText().toString();
+
+        if(emailInput.isEmpty()) {
+            email.setError("Feld muss ausgefüllt werden!");
+            return false;
+        } else if(!Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()){
+            email.setError("Bitte geben Sie eine gültige Email-Adresse ein!");
+            return false;
+        }else {return true;}
+    }
+    public boolean validatePasswort () {
+
+        String passwortInput = passwort.getText().toString();
+
+        if(passwortInput.isEmpty()) {
+            passwort.setError("Feld muss ausgefüllt werden!");
+            return false;
+        } else {return true;}
     }
 
 }

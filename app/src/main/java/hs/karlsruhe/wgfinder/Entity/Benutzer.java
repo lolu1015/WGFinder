@@ -22,6 +22,8 @@ public class Benutzer {
 
     private String email;
 
+    private Integer rolle;
+
     public int getId() {
         return this.id;
     }
@@ -62,5 +64,13 @@ public class Benutzer {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Integer getRolle() {
+        return rolle;
+    }
+
+    public void setRolle(Integer rolle) {
+        this.rolle = rolle;
     }
 }
