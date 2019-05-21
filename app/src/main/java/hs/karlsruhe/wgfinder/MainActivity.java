@@ -18,7 +18,7 @@ import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private AppCompatButton erstelleAccountButton, loginButton;
-    LoginRoomDatabase dbLogin;
+    WGFinderRoomDatabase db;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         erstelleAccountButton = findViewById(R.id.am_b_AccountErstellen);
         loginButton = findViewById(R.id.am_b_Login);
 
-        dbLogin = LoginRoomDatabase.getDatabase(this);
+        db = WGFinderRoomDatabase.getDatabase(this);
 
 
         // Button wird zum onClickListener hinzugefuegt
@@ -90,28 +90,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(email.equals("") || passwort.equals("")) {
             Toast.makeText(getApplicationContext(), "Bitte Email oder Passwort eingeben!", Toast.LENGTH_LONG).show();
         }else {
-            try {
+
                 AsyncTask.execute(new Runnable() {
                     @Override
                     public void run() {
-                        final Login loginOfDb = dbLogin.loginDAO().findLogin(email);
-                        if (loginOfDb != null) {
-                            if (loginOfDb.getPasswort().equals(passwort)) {
+                        if (db.loginDAO().findLogin(email) != null) {
+                            if (db.loginDAO().findLogin(email).getPasswort().equals(passwort)) {
                                 //hier Activity ändern
-                                Toast.makeText(getApplicationContext(), "Anmeldung erfolgt!", Toast.LENGTH_LONG).show();
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(getApplicationContext(), "Anmeldung erfolgt!", Toast.LENGTH_LONG).show();
+                                    }
+                                });
+
                             } else {
-                                Toast.makeText(getApplicationContext(), "Passwort falsch!", Toast.LENGTH_LONG).show();
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(getApplicationContext(), "Passwort falsch!", Toast.LENGTH_LONG).show();
+                                    }
+                                });
                             }
                         } else {
-                            Toast.makeText(getApplicationContext(), "Email nicht vergeben!", Toast.LENGTH_LONG).show();
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(getApplicationContext(), "Email nicht vergeben!", Toast.LENGTH_LONG).show();
+                                }
+                            });
                         }
                     }
                 });
-            }
-            catch(Exception e) {
-                e.printStackTrace();
-                Log.e("Exception","exceptions"+e);
-            }
         }
 
     }

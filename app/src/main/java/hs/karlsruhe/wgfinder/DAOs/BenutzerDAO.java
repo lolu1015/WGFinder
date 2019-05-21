@@ -2,7 +2,6 @@ package hs.karlsruhe.wgfinder.DAOs;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
-import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import hs.karlsruhe.wgfinder.Entity.Benutzer;
 
@@ -12,7 +11,7 @@ import java.util.List;
 @Dao
 public interface BenutzerDAO {
 
-    @Insert (onConflict = OnConflictStrategy.REPLACE)
+    @Insert
     void insertBenutzer(Benutzer benutzer);
 
     @Query("SELECT * FROM benutzer WHERE email = :email")

@@ -14,21 +14,13 @@ public class Benutzer {
     @ColumnInfo(name = "nameId")
     private int id;
 
-    @ColumnInfo(name = "vorname")
     private String vorname;
 
-    @ColumnInfo(name = "nachname")
     private String nachname;
 
-    @ColumnInfo(name = "alter")
     private Integer alter;
 
-    @ColumnInfo(name = "email")
     private String email;
-
-
-
-    public Benutzer(){}
 
     public int getId() {
         return this.id;

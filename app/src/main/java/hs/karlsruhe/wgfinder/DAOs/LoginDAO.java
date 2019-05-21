@@ -2,7 +2,6 @@ package hs.karlsruhe.wgfinder.DAOs;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
-import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import hs.karlsruhe.wgfinder.Entity.Login;
 
@@ -11,7 +10,7 @@ import java.util.List;
 @Dao
 public interface LoginDAO {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert
     void insertLogin(Login login);
 
     @Query("SELECT * FROM login WHERE email = :email AND passwort = :passwort")

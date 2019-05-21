@@ -13,11 +13,9 @@ import androidx.appcompat.widget.AppCompatButton;
 import hs.karlsruhe.wgfinder.Entity.Benutzer;
 import hs.karlsruhe.wgfinder.Entity.Login;
 
-
 public class Account_erstellen extends AppCompatActivity implements View.OnClickListener {
     private AppCompatButton erstelleAccountButton, abbrechenButton;
-    BenutzerRoomDatabase dbBenutzer;
-    LoginRoomDatabase dbLogin;
+    WGFinderRoomDatabase db;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -30,8 +28,7 @@ public class Account_erstellen extends AppCompatActivity implements View.OnClick
         erstelleAccountButton = findViewById(R.id.ace_b_AccountErstellen);
         abbrechenButton = findViewById(R.id.ace_b_Abbrechen);
 
-        dbBenutzer = BenutzerRoomDatabase.getDatabase(this);
-        dbLogin = LoginRoomDatabase.getDatabase(this);
+        db = WGFinderRoomDatabase.getDatabase(this);
 
         erstelleAccountButton.setOnClickListener(this);
         abbrechenButton.setOnClickListener(this);
@@ -43,9 +40,10 @@ public class Account_erstellen extends AppCompatActivity implements View.OnClick
         switch (v.getId()){
             case R.id.ace_b_Abbrechen:
                 sendMessage(v);
-            case R.id.ace_b_AccountErstellen:
-                onAccountErstellenPressed();
+                break;
 
+            case R.id.ace_b_AccountErstellen:
+                onAccountErstellenPressed(v);
                 break;
 
         }
@@ -62,38 +60,54 @@ public class Account_erstellen extends AppCompatActivity implements View.OnClick
         startActivity(intent);
     }
 
-    public void onAccountErstellenPressed(){
+    public void onAccountErstellenPressed(View v){
 
         final Benutzer bn = new Benutzer();
         String vorname  = ((EditText) findViewById(R.id.ace_et_Vorname)).getText().toString();
         String nachname  = ((EditText) findViewById(R.id.ace_et_Nachname)).getText().toString();
-        String email  = ((EditText) findViewById(R.id.ace_et_Email)).getText().toString();
+        final String email  = ((EditText) findViewById(R.id.ace_et_Email)).getText().toString();
         String passwort  = ((EditText) findViewById(R.id.ace_et_Passwort)).getText().toString();
         String passwortWdh  = ((EditText) findViewById(R.id.ace_et_PasswortWdh)).getText().toString();
         final Login login = new Login();
 
 
-            bn.setVorname(vorname);
-            bn.setNachname(nachname);
-            bn.setEmail(email);
-            login.setEmail(email);
-            if(passwort == passwortWdh) {
-                login.setPasswort(passwort);
-            }
+        bn.setVorname(vorname);
+        bn.setNachname(nachname);
+        bn.setEmail(email);
+        login.setEmail(email);
+        if(passwort.equals(passwortWdh)) {
+            login.setPasswort(passwort);
 
             AsyncTask.execute(new Runnable() {
                 @Override
                 public void run() {
-                    dbBenutzer.benutzerDAO().insertBenutzer(bn);
+
+                    if(db.loginDAO().findLogin(email) != null) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(Account_erstellen.this, "Email vorhanden!", Toast.LENGTH_LONG).show();
+                            }
+                        });
+
+
+                    } else {
+                        db.benutzerDAO().insertBenutzer(bn);
+                        db.loginDAO().insertLogin(login);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(Account_erstellen.this, "Account erstellt!", Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    }
                 }
             });
-            AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                dbLogin.loginDAO().insertLogin(login);
-            }
-        });
-        Toast.makeText(getApplicationContext(), "Account angelegt!", Toast.LENGTH_LONG).show();
+
+        } else {
+
+            Toast.makeText(getApplicationContext(), "Passwort nicht gleich!", Toast.LENGTH_LONG).show();
+        }
 
     }
 }

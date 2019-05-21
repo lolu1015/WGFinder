@@ -15,12 +15,9 @@ public class Login {
     @ColumnInfo(name = "loginId")
     private int id;
 
-    @ColumnInfo(name = "email")
     private String email;
 
-    @ColumnInfo(name = "passwort")
     private String passwort;
-
 
     public int getId() {
         return id;
