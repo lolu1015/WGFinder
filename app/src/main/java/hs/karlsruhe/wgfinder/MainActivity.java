@@ -16,7 +16,7 @@ import androidx.appcompat.widget.AppCompatEditText;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private AppCompatButton erstelleAccountButton, loginButton;
+    private AppCompatButton erstelleAccountButton, loginButton, twitterButton;
     private AppCompatEditText email, passwort;
     WGFinderRoomDatabase db;
 
@@ -41,9 +41,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         erstelleAccountButton.setOnClickListener(this);
         loginButton.setOnClickListener(this);
 
+    //Mit dem Twitter Button Profil aufrufen
 
-
+        twitterButton = findViewById(R.id.am_b_LoginFacebook);
+        twitterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openprofilAnsehenActivity();
+            }
+        });
     }
+
+    //Zu Profil Activity wechseln
+
+    public void openprofilAnsehenActivity() {
+        Intent intent = new Intent(this, ProfilAnsehenActivity.class);
+        startActivity(intent);
+    }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -64,6 +80,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (id == R.id.action_info) {
 
             // Hier eine Funktion aufrufen, die beim Klick auf "Informationen" ausgeführt werden soll.
+
 
             return true;
         }

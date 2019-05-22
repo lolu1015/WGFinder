@@ -23,6 +23,8 @@ public interface BenutzerDAO {
     @Query("DELETE FROM benutzer WHERE email = :email")
     void deleteName(String email);
 
-    @Query("SELECT * FROM benutzer ORDER BY NameId DESC LIMIT 1")
+    @Query("SELECT * FROM benutzer ORDER BY email DESC LIMIT 1")
     Benutzer getLastName();
+
+
 }
