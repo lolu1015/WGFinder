@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Patterns;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,7 +21,9 @@ import hs.karlsruhe.wgfinder.Entity.Benutzer;
 public class ProfilAnsehenActivity extends AppCompatActivity {
 
     WGFinderRoomDatabase db;
-    private TextView nameTextView;
+    private TextView beschreibungTextView, pwTextView, preisTextView;
+    private Button bearbeitenButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         db = WGFinderRoomDatabase.getDatabase(this);
@@ -28,7 +31,9 @@ public class ProfilAnsehenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profil_ansehen);
         setTitle("Dein Profil");
 
-        nameTextView = findViewById(R.id.apa_beschreibung);
+        beschreibungTextView = findViewById(R.id.apa_beschreibung);
+        pwTextView = findViewById(R.id.apa_ort);
+        preisTextView = findViewById(R.id.apa_alter);
 
         AsyncTask.execute(new Runnable() {
             @Override
@@ -40,13 +45,33 @@ public class ProfilAnsehenActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        nameTextView.setText(oldName.getEmail());
+                        Toast.makeText(ProfilAnsehenActivity.this, "Aktuelle Daten werden geladen", Toast.LENGTH_SHORT).show();
+                        beschreibungTextView.setText(oldName.getEmail());
+                        pwTextView.setText(oldName.getVorname());
+                        if(oldName.getRolle() != null)
+                        preisTextView.setText(oldName.getRolle());
+                        else
+                            Toast.makeText(ProfilAnsehenActivity.this, "Preis ist noch null", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
         });
 
+        bearbeitenButton = findViewById(R.id.apa_bearbeiten_button);
+        bearbeitenButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openProfilBearbeitenActivity();
+            }
+        });
 
 
     }
+
+    public void openProfilBearbeitenActivity() {
+        Intent intent = new Intent(this, ProfilBearbeitenActivity.class);
+        startActivity(intent);
+    }
+
+
 }

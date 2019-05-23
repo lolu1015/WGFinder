@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         erstelleAccountButton.setOnClickListener(this);
         loginButton.setOnClickListener(this);
 
-    //Mit dem Twitter Button Profil aufrufen
+    //Mit dem Facebook Button Profil aufrufen
 
         twitterButton = findViewById(R.id.am_b_LoginFacebook);
         twitterButton.setOnClickListener(new View.OnClickListener() {

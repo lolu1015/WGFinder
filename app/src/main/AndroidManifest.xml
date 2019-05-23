@@ -9,9 +9,10 @@
         android:roundIcon="@mipmap/haus"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ProfilAnsehenActivity"></activity>
-        <activity android:name=".RolleAussuchen"></activity>
-        <activity android:name=".Account_erstellen"></activity>
+        <activity android:name=".ProfilBearbeitenActivity"></activity>
+        <activity android:name=".ProfilAnsehenActivity" />
+        <activity android:name=".RolleAussuchen" />
+        <activity android:name=".Account_erstellen" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

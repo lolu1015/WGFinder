@@ -1,5 +1,7 @@
 package hs.karlsruhe.wgfinder.Entity;
 
+import android.text.Editable;
+
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -13,6 +15,8 @@ public class Benutzer {
     @Nonnull
     @ColumnInfo(name = "nameId")
     private int id;
+
+    public Benutzer() {}
 
     private String vorname;
 
@@ -73,4 +77,6 @@ public class Benutzer {
     public void setRolle(Integer rolle) {
         this.rolle = rolle;
     }
+
+
 }
