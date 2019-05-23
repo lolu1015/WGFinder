@@ -21,7 +21,7 @@ import hs.karlsruhe.wgfinder.Entity.Benutzer;
 public class ProfilAnsehenActivity extends AppCompatActivity {
 
     WGFinderRoomDatabase db;
-    private TextView beschreibungTextView, pwTextView, preisTextView;
+    private TextView beschreibungTextView, vornameTextView, nachnameTextView, preisTextView, wohflaecheTextView, alterTextView;
     private Button bearbeitenButton;
 
     @Override
@@ -32,8 +32,11 @@ public class ProfilAnsehenActivity extends AppCompatActivity {
         setTitle("Dein Profil");
 
         beschreibungTextView = findViewById(R.id.apa_beschreibung);
-        pwTextView = findViewById(R.id.apa_ort);
-        preisTextView = findViewById(R.id.apa_alter);
+        vornameTextView = findViewById(R.id.apa_vorname);
+        alterTextView = findViewById(R.id.apa_alter);
+        nachnameTextView = findViewById(R.id.apa_nachname);
+        preisTextView = findViewById(R.id.apa_preis);
+        wohflaecheTextView = findViewById(R.id.apa_wohnflaeche);
 
         AsyncTask.execute(new Runnable() {
             @Override
@@ -47,9 +50,18 @@ public class ProfilAnsehenActivity extends AppCompatActivity {
                     public void run() {
                         Toast.makeText(ProfilAnsehenActivity.this, "Aktuelle Daten werden geladen", Toast.LENGTH_SHORT).show();
                         beschreibungTextView.setText(oldName.getEmail());
-                        pwTextView.setText(oldName.getVorname());
+                        vornameTextView.setText(oldName.getVorname());
+                        nachnameTextView.setText(oldName.getNachname());
+                        if(oldName.getPreis() != null)
+                            preisTextView.setText(oldName.getPreis().toString());
+                        else
+                            Toast.makeText(ProfilAnsehenActivity.this, "Preis noch nicht da", Toast.LENGTH_SHORT).show();
+                        if(oldName.getWohnflaeche() != null)
+                            wohflaecheTextView.setText(oldName.getWohnflaeche().toString());
+                        else
+                            Toast.makeText(ProfilAnsehenActivity.this, "Preis noch nicht da", Toast.LENGTH_SHORT).show();
                         if(oldName.getRolle() != null)
-                        preisTextView.setText(oldName.getRolle());
+                        alterTextView.setText(oldName.getRolle());
                         else
                             Toast.makeText(ProfilAnsehenActivity.this, "Preis ist noch null", Toast.LENGTH_SHORT).show();
                     }

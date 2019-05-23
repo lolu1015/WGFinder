@@ -23,7 +23,7 @@ import hs.karlsruhe.wgfinder.Entity.Login;
                     INSTANCE =
                             Room.databaseBuilder(context.getApplicationContext(),
                                     WGFinderRoomDatabase.class,
-                                    "wgfinder2_database").build();
+                                    "wgfinder3_database").build();
                 }
             }
         }

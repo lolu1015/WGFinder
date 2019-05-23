@@ -28,6 +28,48 @@ public class Benutzer {
 
     private Integer rolle;
 
+    //Ab hier Entities für die Profilverwaltung
+
+    private Integer preis;
+
+    private Integer wohnflaeche;
+
+    private Integer mitbewohner;
+
+    private String hobbys;
+
+    public Integer getPreis() {
+        return preis;
+    }
+
+    public Integer getWohnflaeche() {
+        return wohnflaeche;
+    }
+
+    public Integer getMitbewohner() {
+        return mitbewohner;
+    }
+
+    public String getHobbys() {
+        return hobbys;
+    }
+
+    public void setPreis(Integer preis) {
+        this.preis = preis;
+    }
+
+    public void setWohnflaeche(Integer wohnflaeche) {
+        this.wohnflaeche = wohnflaeche;
+    }
+
+    public void setMitbewohner(Integer mitbewohner) {
+        this.mitbewohner = mitbewohner;
+    }
+
+    public void setHobbys(String hobbys) {
+        this.hobbys = hobbys;
+    }
+
     public int getId() {
         return this.id;
     }
