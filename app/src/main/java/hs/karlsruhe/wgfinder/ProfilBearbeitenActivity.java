@@ -3,6 +3,7 @@ package hs.karlsruhe.wgfinder;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,7 +17,7 @@ public class ProfilBearbeitenActivity extends AppCompatActivity {
     WGFinderRoomDatabase db;
     private Button speichernButton;
     private Button zurückButton;
-    private EditText preisEditText,wohnflaecheEditText, mitbewohnerEditText, hobbysEditText, alterEditText;
+    private EditText preisEditText,wohnflaecheEditText, mitbewohnerEditText, hobbysEditText, alterEditText, raucherEditText, haustiereEditText, ortEditText, geschlechtEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +52,7 @@ public class ProfilBearbeitenActivity extends AppCompatActivity {
             }
         });
 
-        hobbysEditText = findViewById(R.id.apb_hobbys);
+        hobbysEditText = findViewById(R.id.apb_raucher);
         hobbysEditText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -61,6 +62,38 @@ public class ProfilBearbeitenActivity extends AppCompatActivity {
 
         alterEditText = findViewById(R.id.apb_alter);
         alterEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(ProfilBearbeitenActivity.this, "123", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        raucherEditText = findViewById(R.id.apb_raucher);
+        raucherEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(ProfilBearbeitenActivity.this, "123", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        haustiereEditText = findViewById(R.id.apb_haustiere);
+        haustiereEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(ProfilBearbeitenActivity.this, "123", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        ortEditText = findViewById(R.id.apb_ort);
+        ortEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(ProfilBearbeitenActivity.this, "123", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        geschlechtEditText = findViewById(R.id.apb_geschlecht);
+        geschlechtEditText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(ProfilBearbeitenActivity.this, "123", Toast.LENGTH_SHORT).show();
@@ -110,11 +143,55 @@ public class ProfilBearbeitenActivity extends AppCompatActivity {
            @Override
            public void run() {
                final Benutzer oldName = db.benutzerDAO().getLastName();
-               oldName.setPreis(Integer.parseInt(preisEditText.getText().toString()));
-               oldName.setWohnflaeche(Integer.parseInt(wohnflaecheEditText.getText().toString()));
-               oldName.setMitbewohner(Integer.parseInt(mitbewohnerEditText.getText().toString()));
-               oldName.setHobbys(hobbysEditText.getText().toString());
-               oldName.setAlter(Integer.parseInt(alterEditText.getText().toString()));
+
+               if(TextUtils.isEmpty(preisEditText.getText()))   // Wenn in das Textfeld nichts eingetragen wurde ...
+               oldName.setPreis(Integer.parseInt(oldName.getPreis().toString())); //dann wird der aktuelle Wert angenommen (TODO; auf Null prüfen)
+               else oldName.setPreis(Integer.parseInt(preisEditText.getText().toString())); //wenn etwas eingetragen ist wird dies übernommen
+
+
+               if(TextUtils.isEmpty(wohnflaecheEditText.getText()))
+               oldName.setWohnflaeche(Integer.parseInt(oldName.getWohnflaeche().toString()));
+               else oldName.setWohnflaeche(Integer.parseInt(wohnflaecheEditText.getText().toString()));
+
+
+               if(TextUtils.isEmpty(mitbewohnerEditText.getText()))
+               oldName.setMitbewohner(Integer.parseInt((oldName.getMitbewohner().toString())));
+               else oldName.setMitbewohner(Integer.parseInt(mitbewohnerEditText.getText().toString()));
+
+
+               if(TextUtils.isEmpty(hobbysEditText.getText()))
+               oldName.setHobbys(oldName.getHobbys());
+               else oldName.setHobbys(hobbysEditText.getText().toString());
+
+               if(TextUtils.isEmpty(alterEditText.getText()))
+               oldName.setAlter(Integer.parseInt(oldName.getAlter().toString()));
+               else oldName.setAlter(Integer.parseInt(alterEditText.getText().toString()));
+
+
+
+               if(TextUtils.isEmpty(raucherEditText.getText()))
+                   oldName.setRaucher(oldName.getRaucher());
+               else oldName.setRaucher(raucherEditText.getText().toString());
+
+
+
+               if(TextUtils.isEmpty(haustiereEditText.getText()))
+                   oldName.setHaustiere(oldName.getHaustiere());
+               else oldName.setHaustiere(haustiereEditText.getText().toString());
+
+
+
+               if(TextUtils.isEmpty(ortEditText.getText()))
+                   oldName.setOrt(oldName.getOrt());
+               else oldName.setOrt(ortEditText.getText().toString());
+
+
+
+               if(TextUtils.isEmpty(geschlechtEditText.getText()))
+                   oldName.setGeschlecht(oldName.getGeschlecht());
+               else oldName.setGeschlecht(geschlechtEditText.getText().toString());
+
+
                AsyncTask.execute(new Runnable() {
                    @Override
                    public void run() {
@@ -126,50 +203,9 @@ public class ProfilBearbeitenActivity extends AppCompatActivity {
 
 
        }));
+
+       openProfilAnsehenActivity();
    }
-
-
-
-
-
-
-
-       //Neuen Namen erstellen
-     //  final Benutzer newName = db.benutzerDAO().getLastName();
-       //DB Objekt mit Daten füttern
-     //  newName.setVorname(alterEditText.getText().toString());
-
-       //Namen mit Hilfe der entsprechenden DAO Schnittstelle in DB einfügen.
-       //Alle Interaktionen mit der Datenbank müssen asynchron in einem eigenen
-       //Thread ausgeführt werden, da sie sonst die Usablity stark beinträchtigen.
-       //Room bestraft uns mit einem Crash, falls wir gegen diese Regel verstoßen.
-     //  AsyncTask.execute(new Runnable() {
-      //     @Override
-      //     public void run() {
-      //         db.benutzerDAO().updateBenutzer(newName);
-      //     }
-      // });
-       //Neuen Namen erstellen
-       //final Benutzer oldName = db.benutzerDAO().getLastName();
-        //DB Objekt mit Daten füttern
-        //oldName.setRolle(alterEditText.getText());   //hier toInt() machen
-        //oldName.setVorname("wallah");
-        //oldName.setNachname("wwallaaaa");
-       //Toast.makeText(this, "Komme ich auf onSavedButton??", Toast.LENGTH_SHORT).show();
-        //Namen mit Hilfe der entsprechenden DAO Schnittstelle in DB einfügen.
-        //Alle Interaktionen mit der Datenbank müssen asynchron in einem eigenen
-        //Thread ausgeführt werden, da sie sonst die Usablity stark beinträchtigen.
-        //Room bestraft uns mit einem Crash, falls wir gegen diese Regel verstoßen.
-      //   AsyncTask.execute(new Runnable() {
-
-      //  @Override
-      //   public void run() {
-       //     Toast.makeText(ProfilBearbeitenActivity.this, "Jetzt sollte die Rolle geuppt werden", Toast.LENGTH_SHORT).show();
-       //    db.benutzerDAO().insertBenutzer(oldName);
-       //     }
-       // });
-
-
 
     public void openProfilAnsehenActivity() {
         Intent intent = new Intent(this, ProfilAnsehenActivity.class);

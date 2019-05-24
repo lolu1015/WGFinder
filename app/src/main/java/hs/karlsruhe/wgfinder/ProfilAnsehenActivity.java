@@ -21,7 +21,9 @@ import hs.karlsruhe.wgfinder.Entity.Benutzer;
 public class ProfilAnsehenActivity extends AppCompatActivity {
 
     WGFinderRoomDatabase db;
-    private TextView beschreibungTextView, vornameTextView, nachnameTextView, preisTextView, wohflaecheTextView, mitbewohnerTextView, alterTextView, hobbysTextView;
+    private TextView beschreibungTextView, vornameTextView, nachnameTextView, preisTextView,
+            wohflaecheTextView, mitbewohnerTextView, alterTextView, hobbysTextView,
+            raucherTextView, haustierTextView, ortTextView, geschlechtTextView;
     private Button bearbeitenButton;
 
     @Override
@@ -39,6 +41,10 @@ public class ProfilAnsehenActivity extends AppCompatActivity {
         wohflaecheTextView = findViewById(R.id.apa_wohnflaeche);
         mitbewohnerTextView = findViewById(R.id.apa_anz_mitbewohner);
         hobbysTextView = findViewById(R.id.apa_hobbys);
+        raucherTextView = findViewById(R.id.apa_raucherwg);
+        haustierTextView = findViewById(R.id.apa_haustiere);
+        ortTextView = findViewById(R.id.apa_ort);
+        geschlechtTextView = findViewById(R.id.apa_geschlecht);
 
         AsyncTask.execute(new Runnable() {
             @Override
@@ -62,8 +68,8 @@ public class ProfilAnsehenActivity extends AppCompatActivity {
                             wohflaecheTextView.setText(oldName.getWohnflaeche().toString());
                         else
                             Toast.makeText(ProfilAnsehenActivity.this, "Preis noch nicht da", Toast.LENGTH_SHORT).show();
-                        if(oldName.getRolle() != null)
-                        alterTextView.setText(oldName.getRolle());
+                        if(oldName.getAlter() != null)
+                        alterTextView.setText(oldName.getAlter().toString());
                         else
                             Toast.makeText(ProfilAnsehenActivity.this, "Preis ist noch null", Toast.LENGTH_SHORT).show();
                         if(oldName.getMitbewohner() != null)
@@ -74,10 +80,24 @@ public class ProfilAnsehenActivity extends AppCompatActivity {
                             hobbysTextView.setText(oldName.getHobbys());
                         else
                             Toast.makeText(ProfilAnsehenActivity.this, "Preis ist noch null", Toast.LENGTH_SHORT).show();
-                        if(oldName.getAlter() != null)
-                            alterTextView.setText(oldName.getAlter().toString());
+                        if(oldName.getRaucher() != null)
+                            raucherTextView.setText(oldName.getRaucher().toString());
                         else
                             Toast.makeText(ProfilAnsehenActivity.this, "Preis ist noch null", Toast.LENGTH_SHORT).show();
+                        if(oldName.getHaustiere() != null)
+                            haustierTextView.setText(oldName.getHaustiere().toString());
+                        else
+                            Toast.makeText(ProfilAnsehenActivity.this, "Preis ist noch null", Toast.LENGTH_SHORT).show();
+                        if(oldName.getOrt() != null)
+                            ortTextView.setText(oldName.getOrt().toString());
+                        else
+                            Toast.makeText(ProfilAnsehenActivity.this, "Preis ist noch null", Toast.LENGTH_SHORT).show();
+                        if(oldName.getGeschlecht() != null)
+                            geschlechtTextView.setText(oldName.getGeschlecht().toString());
+                        else
+                            Toast.makeText(ProfilAnsehenActivity.this, "Preis ist noch null", Toast.LENGTH_SHORT).show();
+
+
 
                     }
                 });

@@ -38,6 +38,46 @@ public class Benutzer {
 
     private String hobbys;
 
+    private String raucher;
+
+    private String haustiere;
+
+    private String ort;
+
+    private String geschlecht;
+
+    public String getRaucher() {
+        return raucher;
+    }
+
+    public String getHaustiere() {
+        return haustiere;
+    }
+
+    public String getOrt() {
+        return ort;
+    }
+
+    public String getGeschlecht() {
+        return geschlecht;
+    }
+
+    public void setRaucher(String raucher) {
+        this.raucher = raucher;
+    }
+
+    public void setHaustiere(String haustiere) {
+        this.haustiere = haustiere;
+    }
+
+    public void setOrt(String ort) {
+        this.ort = ort;
+    }
+
+    public void setGeschlecht(String geschlecht) {
+        this.geschlecht = geschlecht;
+    }
+
     public Integer getPreis() {
         return preis;
     }

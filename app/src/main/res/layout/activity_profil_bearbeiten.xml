@@ -7,110 +7,167 @@
     tools:context=".ProfilBearbeitenActivity">
 
     <EditText
-        android:id="@+id/apb_mitbewohner"
-        android:layout_width="0dp"
+        android:id="@+id/apb_geschlecht"
+        android:layout_width="395dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:hint="Geschlecht"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/apb_ort" />
+
+    <EditText
+        android:id="@+id/apb_hobbys"
+        android:layout_width="395dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:hint="Hobbys"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/apb_alter" />
+
+    <EditText
+        android:id="@+id/apb_haustiere"
+        android:layout_width="395dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:hint="Haustiere"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/apb_raucher" />
+
+    <EditText
+        android:id="@+id/apb_ort"
+        android:layout_width="395dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:hint="Ort"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/apb_haustiere" />
+
+    <EditText
+        android:id="@+id/apb_mitbewohner"
+        android:layout_width="395dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:ems="10"
         android:hint="Anzahl Mitbewohner"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/apb_wohnflaeche" />
 
     <EditText
-        android:id="@+id/apb_hobbys"
-        android:layout_width="0dp"
+        android:id="@+id/apb_raucher"
+        android:layout_width="395dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:ems="10"
-        android:hint="Hobbys"
-        android:inputType="number"
-        app:layout_constraintBottom_toTopOf="@+id/apb_speichern"
+        android:hint="Raucher"
+        android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/apb_alter" />
+        app:layout_constraintTop_toBottomOf="@+id/apb_hobbys" />
 
     <EditText
         android:id="@+id/apb_alter"
-        android:layout_width="0dp"
+        android:layout_width="395dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:ems="10"
         android:hint="Alter"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/apb_mitbewohner" />
 
     <EditText
         android:id="@+id/apb_preis"
-        android:layout_width="0dp"
+        android:layout_width="395dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="606dp"
         android:ems="10"
         android:hint="Preis"
         android:inputType="number"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/apb_wohnflaeche"
-        android:layout_width="0dp"
+        android:layout_width="395dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:ems="10"
         android:hint="Wohnfläche"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/apb_preis" />
 
     <Button
         android:id="@+id/apb_speichern"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="133dp"
+        android:layout_height="42dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="252dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="Speichern"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/apb_wohnflaeche"
-        app:layout_constraintVertical_bias="0.566" />
+        app:layout_constraintTop_toBottomOf="@+id/apb_geschlecht" />
 
     <Button
         android:id="@+id/apb_zurück_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="Button"
+        android:layout_marginBottom="8dp"
+        android:text="Abbrechen"
+        app:layout_constraintBottom_toTopOf="@+id/guideline6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/apb_speichern" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="631dp" />
 </android.support.constraint.ConstraintLayout>
