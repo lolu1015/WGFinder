@@ -21,7 +21,7 @@ import hs.karlsruhe.wgfinder.Entity.Benutzer;
 public class ProfilAnsehenActivity extends AppCompatActivity {
 
     WGFinderRoomDatabase db;
-    private TextView beschreibungTextView, vornameTextView, nachnameTextView, preisTextView, wohflaecheTextView, alterTextView;
+    private TextView beschreibungTextView, vornameTextView, nachnameTextView, preisTextView, wohflaecheTextView, mitbewohnerTextView, alterTextView, hobbysTextView;
     private Button bearbeitenButton;
 
     @Override
@@ -37,6 +37,8 @@ public class ProfilAnsehenActivity extends AppCompatActivity {
         nachnameTextView = findViewById(R.id.apa_nachname);
         preisTextView = findViewById(R.id.apa_preis);
         wohflaecheTextView = findViewById(R.id.apa_wohnflaeche);
+        mitbewohnerTextView = findViewById(R.id.apa_anz_mitbewohner);
+        hobbysTextView = findViewById(R.id.apa_hobbys);
 
         AsyncTask.execute(new Runnable() {
             @Override
@@ -64,6 +66,19 @@ public class ProfilAnsehenActivity extends AppCompatActivity {
                         alterTextView.setText(oldName.getRolle());
                         else
                             Toast.makeText(ProfilAnsehenActivity.this, "Preis ist noch null", Toast.LENGTH_SHORT).show();
+                        if(oldName.getMitbewohner() != null)
+                            mitbewohnerTextView.setText(oldName.getMitbewohner().toString());
+                        else
+                            Toast.makeText(ProfilAnsehenActivity.this, "Preis ist noch null", Toast.LENGTH_SHORT).show();
+                        if(oldName.getHobbys() != null)
+                            hobbysTextView.setText(oldName.getHobbys());
+                        else
+                            Toast.makeText(ProfilAnsehenActivity.this, "Preis ist noch null", Toast.LENGTH_SHORT).show();
+                        if(oldName.getAlter() != null)
+                            alterTextView.setText(oldName.getAlter().toString());
+                        else
+                            Toast.makeText(ProfilAnsehenActivity.this, "Preis ist noch null", Toast.LENGTH_SHORT).show();
+
                     }
                 });
             }

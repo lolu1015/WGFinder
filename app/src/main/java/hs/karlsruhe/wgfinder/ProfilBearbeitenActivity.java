@@ -16,7 +16,7 @@ public class ProfilBearbeitenActivity extends AppCompatActivity {
     WGFinderRoomDatabase db;
     private Button speichernButton;
     private Button zurückButton;
-    private EditText preisEditText,wohnflaecheEditText;
+    private EditText preisEditText,wohnflaecheEditText, mitbewohnerEditText, hobbysEditText, alterEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +37,30 @@ public class ProfilBearbeitenActivity extends AppCompatActivity {
 
         wohnflaecheEditText = findViewById(R.id.apb_wohnflaeche);
         wohnflaecheEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(ProfilBearbeitenActivity.this, "123", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        mitbewohnerEditText = findViewById(R.id.apb_mitbewohner);
+        mitbewohnerEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(ProfilBearbeitenActivity.this, "123", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        hobbysEditText = findViewById(R.id.apb_hobbys);
+        hobbysEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(ProfilBearbeitenActivity.this, "123", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        alterEditText = findViewById(R.id.apb_alter);
+        alterEditText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(ProfilBearbeitenActivity.this, "123", Toast.LENGTH_SHORT).show();
@@ -88,6 +112,9 @@ public class ProfilBearbeitenActivity extends AppCompatActivity {
                final Benutzer oldName = db.benutzerDAO().getLastName();
                oldName.setPreis(Integer.parseInt(preisEditText.getText().toString()));
                oldName.setWohnflaeche(Integer.parseInt(wohnflaecheEditText.getText().toString()));
+               oldName.setMitbewohner(Integer.parseInt(mitbewohnerEditText.getText().toString()));
+               oldName.setHobbys(hobbysEditText.getText().toString());
+               oldName.setAlter(Integer.parseInt(alterEditText.getText().toString()));
                AsyncTask.execute(new Runnable() {
                    @Override
                    public void run() {
