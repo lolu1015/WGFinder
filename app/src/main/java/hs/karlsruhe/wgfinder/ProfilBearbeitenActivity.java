@@ -52,7 +52,7 @@ public class ProfilBearbeitenActivity extends AppCompatActivity {
             }
         });
 
-        hobbysEditText = findViewById(R.id.apb_raucher);
+        hobbysEditText = findViewById(R.id.apb_hobbys);
         hobbysEditText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

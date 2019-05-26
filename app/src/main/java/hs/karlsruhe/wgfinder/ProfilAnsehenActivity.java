@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,6 +26,7 @@ public class ProfilAnsehenActivity extends AppCompatActivity {
             wohflaecheTextView, mitbewohnerTextView, alterTextView, hobbysTextView,
             raucherTextView, haustierTextView, ortTextView, geschlechtTextView;
     private Button bearbeitenButton;
+    private ImageView profilBildView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,9 @@ public class ProfilAnsehenActivity extends AppCompatActivity {
         haustierTextView = findViewById(R.id.apa_haustiere);
         ortTextView = findViewById(R.id.apa_ort);
         geschlechtTextView = findViewById(R.id.apa_geschlecht);
+
+        profilBildView = findViewById(R.id.profilBildView);
+        profilBildView.setImageResource(R.drawable.dino);
 
         AsyncTask.execute(new Runnable() {
             @Override
