@@ -27,6 +27,19 @@ public class ProfilBearbeitenActivity extends AppCompatActivity {
         setTitle("Dein Profil bearbeiten");
 
 
+        //Werte, die schon in der DB sind, werden im Feld voher ausgefüllt.
+
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                final Benutzer oldName = db.benutzerDAO().getLastName();
+                if(oldName.getPreis() != null)
+                    preisEditText.setText(oldName.getPreis().toString());
+
+
+            }
+        });
+
 
         preisEditText = findViewById(R.id.apb_preis);
         preisEditText.setOnClickListener(new View.OnClickListener() {
