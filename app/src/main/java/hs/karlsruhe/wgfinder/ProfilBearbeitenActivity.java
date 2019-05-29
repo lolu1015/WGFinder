@@ -18,7 +18,6 @@ public class ProfilBearbeitenActivity extends AppCompatActivity {
     private Button speichernButton;
     private Button zurückButton;
     private EditText preisEditText,wohnflaecheEditText, mitbewohnerEditText, hobbysEditText, alterEditText, raucherEditText, haustiereEditText, ortEditText, geschlechtEditText;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,6 +111,10 @@ public class ProfilBearbeitenActivity extends AppCompatActivity {
                 Toast.makeText(ProfilBearbeitenActivity.this, "123", Toast.LENGTH_SHORT).show();
             }
         });
+
+        //Hier wird der Slider angesteuert
+
+
 
 
 

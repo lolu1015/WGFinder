@@ -270,7 +270,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:ems="10"
-        android:hint="Anzahl Mitbewohner"
+        android:hint="Mitbewohner"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline7"
@@ -428,4 +428,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_begin="16dp" />
+
+
 </android.support.constraint.ConstraintLayout>

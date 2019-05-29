@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/haus"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ProfilBearbeitenActivity"></activity>
+        <activity android:name=".ProfilBearbeitenActivity" />
         <activity android:name=".ProfilAnsehenActivity" />
         <activity android:name=".RolleAussuchen" />
         <activity android:name=".Account_erstellen" />
