@@ -12,6 +12,7 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
 
 import hs.karlsruhe.wgfinder.Entity.Benutzer;
 
@@ -20,7 +21,7 @@ public class ProfilBearbeitenActivity extends AppCompatActivity {
     private Button speichernButton;
     private Button zurückButton;
     private EditText preisEditText,wohnflaecheEditText, mitbewohnerEditText, hobbysEditText, alterEditText, raucherEditText, haustiereEditText, ortEditText, geschlechtEditText;
-    private Switch raucherEditSwitch;
+    private SwitchCompat raucherEditSwitch, haustiereEditSwitch;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,19 +29,6 @@ public class ProfilBearbeitenActivity extends AppCompatActivity {
         db = WGFinderRoomDatabase.getDatabase(this);
         setTitle("Dein Profil bearbeiten");
 
-
-        //Werte, die schon in der DB sind, werden im Feld voher ausgefüllt.
-
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                final Benutzer oldName = db.benutzerDAO().getLastName();
-                if(oldName.getPreis() != null)
-                    preisEditText.setText(oldName.getPreis().toString());
-
-
-            }
-        });
 
 
         preisEditText = findViewById(R.id.apb_preis);
@@ -91,6 +79,8 @@ public class ProfilBearbeitenActivity extends AppCompatActivity {
             }
         });
 
+
+
         haustiereEditText = findViewById(R.id.apb_haustiere);
         haustiereEditText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,19 +106,8 @@ public class ProfilBearbeitenActivity extends AppCompatActivity {
         });
 
         //Hier wird Switch angesteuert
-
         raucherEditSwitch = findViewById(R.id.apb_raucher_switch);
-        raucherEditSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-
-            }
-        });
-
-
-
-
-
+        haustiereEditSwitch = findViewById(R.id.apb_haustiere_switch);
 
         zurückButton = findViewById(R.id.apb_zurück_button);
         zurückButton.setOnClickListener(new View.OnClickListener() {
@@ -146,7 +125,7 @@ public class ProfilBearbeitenActivity extends AppCompatActivity {
                 onSaveButtonPressed();
             }
         });
-    }
+
 
  /*  // @Override
     public void onClick(View v) {
@@ -162,6 +141,28 @@ public class ProfilBearbeitenActivity extends AppCompatActivity {
     }
 
    */
+
+        //Werte, die schon in der DB sind, werden im Feld voher ausgefüllt.
+
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                final Benutzer oldName = db.benutzerDAO().getLastName();
+                if (oldName.getPreis() != null)
+                    preisEditText.setText(oldName.getPreis().toString());
+
+
+                if (oldName.getRaucher())
+                   raucherEditSwitch.setChecked(true);
+                if (oldName.getHaustiere())
+                    haustiereEditSwitch.setChecked(true);
+
+
+            }
+        });
+    }
+
+
 
    public void onSaveButtonPressed(){
 
@@ -196,15 +197,22 @@ public class ProfilBearbeitenActivity extends AppCompatActivity {
 
 
 
-               if(TextUtils.isEmpty(raucherEditText.getText()))
-                   oldName.setRaucher(oldName.getRaucher());
-               else oldName.setRaucher(raucherEditText.getText().toString());
+              // if(TextUtils.isEmpty(raucherEditText.getText()))
+              //     oldName.setRaucher(oldName.getRaucher());
+              // else oldName.setRaucher(raucherEditText.getText().toString());
 
 
+                if (raucherEditSwitch.isChecked())
+                    oldName.setRaucher(true);
+                else oldName.setRaucher(false);
 
-               if(TextUtils.isEmpty(haustiereEditText.getText()))
-                   oldName.setHaustiere(oldName.getHaustiere());
-               else oldName.setHaustiere(haustiereEditText.getText().toString());
+               if (haustiereEditSwitch.isChecked())
+                   oldName.setHaustiere(true);
+               else oldName.setHaustiere(false);
+
+              // if(TextUtils.isEmpty(haustiereEditText.getText()))
+              //     oldName.setHaustiere(oldName.getHaustiere());
+              // else oldName.setHaustiere(haustiereEditText.getText().toString());
 
 
 

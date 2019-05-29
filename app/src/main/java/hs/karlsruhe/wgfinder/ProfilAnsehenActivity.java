@@ -8,6 +8,7 @@ import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +28,7 @@ public class ProfilAnsehenActivity extends AppCompatActivity {
             raucherTextView, haustierTextView, ortTextView, geschlechtTextView;
     private Button bearbeitenButton;
     private ImageView profilBildView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,7 @@ public class ProfilAnsehenActivity extends AppCompatActivity {
         profilBildView = findViewById(R.id.profilBildView);
         profilBildView.setImageResource(R.drawable.dino);
 
+
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
@@ -62,8 +65,11 @@ public class ProfilAnsehenActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         Toast.makeText(ProfilAnsehenActivity.this, "Aktuelle Daten werden geladen", Toast.LENGTH_SHORT).show();
+                        if (oldName.getEmail() != null)
                         beschreibungTextView.setText(oldName.getEmail());
+                        if (oldName.getVorname() != null)
                         vornameTextView.setText(oldName.getVorname());
+                        if (oldName.getNachname() != null)
                         nachnameTextView.setText(oldName.getNachname());
                         if(oldName.getPreis() != null)
                             preisTextView.setText(oldName.getPreis().toString());
@@ -85,14 +91,16 @@ public class ProfilAnsehenActivity extends AppCompatActivity {
                             hobbysTextView.setText(oldName.getHobbys());
                         else
                             Toast.makeText(ProfilAnsehenActivity.this, "Preis ist noch null", Toast.LENGTH_SHORT).show();
-                        if(oldName.getRaucher() != null)
-                            raucherTextView.setText(oldName.getRaucher().toString());
-                        else
-                            Toast.makeText(ProfilAnsehenActivity.this, "Preis ist noch null", Toast.LENGTH_SHORT).show();
+                        if(oldName.getRaucher() != null){
+                            if(oldName.getRaucher() == true)
+                            raucherTextView.setText("Ja");
+                        else raucherTextView.setText("Nein");}
+
                         if(oldName.getHaustiere() != null)
-                            haustierTextView.setText(oldName.getHaustiere().toString());
-                        else
-                            Toast.makeText(ProfilAnsehenActivity.this, "Preis ist noch null", Toast.LENGTH_SHORT).show();
+                            if(oldName.getHaustiere() == true)
+                            haustierTextView.setText("Ja");
+                        else haustierTextView.setText("Nein");
+
                         if(oldName.getOrt() != null)
                             ortTextView.setText(oldName.getOrt().toString());
                         else

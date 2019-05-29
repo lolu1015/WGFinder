@@ -239,14 +239,12 @@
 
     <EditText
         android:id="@+id/apb_haustiere"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="20dp"
+        android:layout_height="40dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
         android:ems="10"
         android:hint="Haustiere"
         android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline7"
         app:layout_constraintTop_toBottomOf="@+id/apb_raucher" />
 
@@ -278,7 +276,7 @@
 
     <EditText
         android:id="@+id/apb_raucher"
-        android:layout_width="100dp"
+        android:layout_width="20dp"
         android:layout_height="44dp"
         android:layout_marginTop="8dp"
         android:ems="10"
@@ -427,24 +425,41 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.04136253" />
 
-    <Switch
+    <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/apb_raucher_switch"
-        android:layout_width="90dp"
-        android:layout_height="41dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="62dp"
-        android:layout_marginBottom="61dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="8dp"
         android:checked="false"
         android:showText="true"
-        android:splitTrack="false"
+        android:splitTrack="true"
         android:textOff="NEIN"
         android:textOn="JA"
-        app:layout_constraintBottom_toBottomOf="@+id/apb_haustiere"
         app:layout_constraintEnd_toEndOf="@+id/barrier"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/apb_raucher"
-        app:layout_constraintTop_toTopOf="@+id/apb_hobbys"
-        app:layout_constraintVertical_bias="0.428" />
+        app:layout_constraintTop_toBottomOf="@+id/apb_hobbys"
+        app:showText="true"
+        app:splitTrack="true" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/apb_haustiere_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:textOff="NEIN"
+        android:textOn="JA"
+        app:layout_constraintBottom_toTopOf="@+id/apb_ort"
+        app:layout_constraintEnd_toEndOf="@+id/barrier"
+        app:layout_constraintStart_toEndOf="@+id/apb_haustiere"
+        app:layout_constraintTop_toBottomOf="@+id/apb_raucher_switch"
+        app:layout_constraintVertical_bias="0.153"
+        app:showText="true"
+        app:splitTrack="true" />
 
 
 </android.support.constraint.ConstraintLayout>

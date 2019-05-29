@@ -38,21 +38,19 @@ public class Benutzer {
 
     private String hobbys;
 
-    private String raucher;
+    private Boolean raucher;
 
-    private String haustiere;
+    private Boolean haustiere;
 
     private String ort;
 
     private String geschlecht;
 
-    public String getRaucher() {
+    public Boolean getRaucher() {
         return raucher;
     }
 
-    public String getHaustiere() {
-        return haustiere;
-    }
+
 
     public String getOrt() {
         return ort;
@@ -62,11 +60,15 @@ public class Benutzer {
         return geschlecht;
     }
 
-    public void setRaucher(String raucher) {
+    public void setRaucher(Boolean raucher) {
         this.raucher = raucher;
     }
 
-    public void setHaustiere(String haustiere) {
+    public Boolean getHaustiere() {
+        return haustiere;
+    }
+
+    public void setHaustiere(Boolean haustiere) {
         this.haustiere = haustiere;
     }
 
