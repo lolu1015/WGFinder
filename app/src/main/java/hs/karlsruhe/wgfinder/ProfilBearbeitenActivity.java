@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +20,7 @@ public class ProfilBearbeitenActivity extends AppCompatActivity {
     private Button speichernButton;
     private Button zurückButton;
     private EditText preisEditText,wohnflaecheEditText, mitbewohnerEditText, hobbysEditText, alterEditText, raucherEditText, haustiereEditText, ortEditText, geschlechtEditText;
+    private Switch raucherEditSwitch;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,7 +115,15 @@ public class ProfilBearbeitenActivity extends AppCompatActivity {
             }
         });
 
-        //Hier wird der Slider angesteuert
+        //Hier wird Switch angesteuert
+
+        raucherEditSwitch = findViewById(R.id.apb_raucher_switch);
+        raucherEditSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+
+            }
+        });
 
 
 
