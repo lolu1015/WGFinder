@@ -38,8 +38,9 @@ dependencies {
     // optional - Guava support for Room, including Optional and ListenableFuture
     implementation "androidx.room:room-guava:$room_version"
 //
-    implementation ('com.appyvet:materialrangebar:1.4.6') {
-        exclude module: 'support-compat'}
+    implementation('com.appyvet:materialrangebar:1.4.6') {
+        exclude module: 'support-compat'
+    }
 
     // Für den Slider wird Range SeekBar benötigt
     // implementation 'io.apptik.widget:multislider:1.3' //

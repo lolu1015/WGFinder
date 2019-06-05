@@ -59,7 +59,7 @@ public class ProfilBearbeitenActivity extends AppCompatActivity {
         hobbysEditText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(ProfilBearbeitenActivity.this, "123", Toast.LENGTH_SHORT).show();
+                openHobbyCheckboxActivity();
             }
         });
 
@@ -142,6 +142,9 @@ public class ProfilBearbeitenActivity extends AppCompatActivity {
 
    */
 
+
+
+
         //Werte, die schon in der DB sind, werden im Feld voher ausgefüllt.
 
         AsyncTask.execute(new Runnable() {
@@ -160,6 +163,13 @@ public class ProfilBearbeitenActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    // Auf Feld Hobbys klicken um auf die View zu kommen mit den Checkboxen.
+
+    public void openHobbyCheckboxActivity() {
+        Intent intent = new Intent(this, ProfilHobbysActivity.class);
+        startActivity(intent);
     }
 
 
