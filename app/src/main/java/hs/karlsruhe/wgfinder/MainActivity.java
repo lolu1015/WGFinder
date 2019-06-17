@@ -13,12 +13,17 @@ import android.view.MenuItem;
 import android.view.View;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
+import hs.karlsruhe.wgfinder.Entity.Temp;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private AppCompatButton erstelleAccountButton, loginButton, twitterButton;
     private AppCompatEditText email, passwort;
     WGFinderRoomDatabase db;
+    private String emailTemp;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -43,13 +48,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     //Mit dem Facebook Button Profil aufrufen
 
-        twitterButton = findViewById(R.id.am_b_LoginFacebook);
-        twitterButton.setOnClickListener(new View.OnClickListener() {
+        //twitterButton = findViewById(R.id.am_b_LoginFacebook);
+        /*twitterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openprofilAnsehenActivity();
             }
-        });
+        });*/
     }
 
     //Zu Profil Activity wechseln
@@ -105,32 +110,46 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void onLoginPressed() {
 
+        final Temp temp = new Temp();
         final String email = ((EditText) findViewById(R.id.am_et_Email)).getText().toString();
         final String passwort = ((EditText) findViewById(R.id.am_et_Passwort)).getText().toString();
+        final String passwortHashed = md5(passwort);
         if(validateEmail() & validatePasswort()) {
 
                 AsyncTask.execute(new Runnable() {
                     @Override
                     public void run() {
                         if (db.loginDAO().findLogin(email) != null) {
-                            if (db.loginDAO().findLogin(email).getPasswort().equals(passwort)) {
-                                //hier Activity ändern
+                            if (db.loginDAO().findLogin(email).getPasswort().equals(passwortHashed)) {
+                                //hier Login + Activity ändern
+
+                                //temp Token setzen
+                                //########Hier wird die neue Spalte nicht gesetzt#######
+                                temp.setEmail(email);
+                                if(db.tempDAO().anzahlSpalten() > 0) {
+                                    db.tempDAO().updateTemp(email);
+                                }else {
+                                    temp.setId(1);
+                                    db.tempDAO().insertTemp(temp);
+                                }
+
+                                emailTemp = db.tempDAO().findTemp();
+
+
+
+                                //Anmerkung Anmeldung erfolgt
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        Toast.makeText(getApplicationContext(), "Anmeldung erfolgt!", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(getApplicationContext(), "Anmeldung erfolgt!" +emailTemp, Toast.LENGTH_LONG).show();
                                     }
                                 });
-                                if (db.benutzerDAO().findBenutzer(email).getRolle() != null) {
-                                    if (db.benutzerDAO().findBenutzer(email).getRolle().equals(1)) {
-                                        // Activity wechseln auf Rolle Sucher
-                                    } else {
-                                        //nicht implementiert
-                                    }
-                                } else {
-                                    wechseleZuRolleAussuchen();
-                                }
+
+                                rolleAussuchen();
+
+
                             } else {
+                                //falsches Passwort
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
@@ -139,6 +158,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 });
                             }
                         } else {
+                            //Email falsch
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
@@ -152,8 +172,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    private void rolleAussuchen() {
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+
+                if (db.benutzerDAO().findBenutzer(emailTemp).getRolle() != null) {
+                    if (db.benutzerDAO().findBenutzer(emailTemp).getRolle().equals(1)) {
+                        // Activity wechseln auf Rolle Sucher
+                        wechseleZuProfilBearbeiten();
+                    } else {
+                        //nicht implementiert
+                    }
+                } else {
+                    // Activity wechseln auf Rolle aussuchen
+                    wechseleZuRolleAussuchen();
+                }
+
+            }
+        });
+    }
+
     private void wechseleZuRolleAussuchen() {
         Intent intent = new Intent(this,RolleAussuchen.class);
+        startActivity(intent);
+    }
+    private void wechseleZuProfilBearbeiten() {
+        //hier muss es wieder auf ProfilBearbeiten geändert werden
+        Intent intent = new Intent(this,ProfilAnsehenActivity.class);
         startActivity(intent);
     }
 
@@ -184,6 +230,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             passwort.setError("Feld muss ausgefüllt werden!");
             return false;
         } else {return true;}
+    }
+    public String md5(String s) {
+        try {
+            // Create MD5 Hash
+            MessageDigest digest = java.security.MessageDigest.getInstance("MD5");
+            digest.update(s.getBytes());
+            byte messageDigest[] = digest.digest();
+
+            // Create Hex String
+            StringBuffer hexString = new StringBuffer();
+            for (int i=0; i<messageDigest.length; i++)
+                hexString.append(Integer.toHexString(0xFF & messageDigest[i]));
+            return hexString.toString();
+
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 
 }

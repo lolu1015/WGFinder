@@ -6,14 +6,17 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import hs.karlsruhe.wgfinder.DAOs.BenutzerDAO;
 import hs.karlsruhe.wgfinder.DAOs.LoginDAO;
+import hs.karlsruhe.wgfinder.DAOs.TempDAO;
 import hs.karlsruhe.wgfinder.Entity.Benutzer;
 import hs.karlsruhe.wgfinder.Entity.Login;
+import hs.karlsruhe.wgfinder.Entity.Temp;
 
-@Database(entities = {Benutzer.class, Login.class}, version = 1, exportSchema = false)
+@Database(entities = {Benutzer.class, Login.class, Temp.class}, version = 1, exportSchema = false)
  abstract class WGFinderRoomDatabase extends RoomDatabase {
 
     public abstract BenutzerDAO benutzerDAO();
     public abstract LoginDAO loginDAO();
+    public abstract TempDAO tempDAO();
     private static WGFinderRoomDatabase INSTANCE;
 
     static WGFinderRoomDatabase getDatabase(final Context context) {
@@ -23,7 +26,7 @@ import hs.karlsruhe.wgfinder.Entity.Login;
                     INSTANCE =
                             Room.databaseBuilder(context.getApplicationContext(),
                                     WGFinderRoomDatabase.class,
-                                    "wgfinder6_database").build();
+                                    "wgfinder13_database").build();
                 }
             }
         }

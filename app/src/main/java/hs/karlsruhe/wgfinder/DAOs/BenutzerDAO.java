@@ -30,8 +30,8 @@ public interface BenutzerDAO {
     @Query("SELECT * FROM benutzer ORDER BY NameId DESC LIMIT 1")
     Benutzer getLastName();
 
-    @Query("UPDATE benutzer set rolle = :rolle")
-    void updateRole(Integer rolle);
+    @Query("UPDATE benutzer SET rolle = :rolle WHERE email = :email")
+    void updateRole(Integer rolle, String email);
 
     @Update
     void updateBenutzer(Benutzer benutzer);

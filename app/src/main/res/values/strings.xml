@@ -5,6 +5,7 @@
     <string name="toFirstActivity">"erste Activity öffnen "</string>
     <string name="action_info">Info</string>
     <string name="action_beenden">Beenden</string>
+    <string name="action_LogOut">Log Out</string>
 
     <string name="nachname">Nachname</string>
     <string name="vorname">Vorname</string>

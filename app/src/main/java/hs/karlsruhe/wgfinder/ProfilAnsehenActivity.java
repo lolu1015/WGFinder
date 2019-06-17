@@ -29,6 +29,12 @@ public class ProfilAnsehenActivity extends AppCompatActivity {
     private Button bearbeitenButton;
     private ImageView profilBildView;
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.logged_in, menu);
+        return true;
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +57,7 @@ public class ProfilAnsehenActivity extends AppCompatActivity {
         geschlechtTextView = findViewById(R.id.apa_geschlecht);
 
         profilBildView = findViewById(R.id.profilBildView);
-        profilBildView.setImageResource(R.drawable.dino);
+        //profilBildView.setImageResource(R.drawable.dino);
 
 
         AsyncTask.execute(new Runnable() {

@@ -1,4 +1,4 @@
-package hs.karlsruhe.wgfinder;
+/*package hs.karlsruhe.wgfinder;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -14,6 +14,7 @@ import static org.junit.Assert.*;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
+/*
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
     @Test
@@ -24,3 +25,4 @@ public class ExampleInstrumentedTest {
         assertEquals("hs.karlsruhe.wgfinder", appContext.getPackageName());
     }
 }
+*/
