@@ -34,6 +34,27 @@ public class ProfilAnsehenActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.logged_in, menu);
         return true;
     }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.action_LogOut:
+                logOut();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void logOut() {
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                db.tempDAO().deleteTemps();
+                changeToMain();
+            }
+        });
+    }
 
 
     @Override
@@ -136,6 +157,11 @@ public class ProfilAnsehenActivity extends AppCompatActivity {
 
     public void openProfilBearbeitenActivity() {
         Intent intent = new Intent(this, ProfilBearbeitenActivity.class);
+        startActivity(intent);
+    }
+    public void changeToMain()
+    {
+        Intent intent = new Intent(this,MainActivity.class);
         startActivity(intent);
     }
 

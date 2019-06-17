@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -28,6 +29,27 @@ public class ProfilBearbeitenActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.logged_in, menu);
         return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.action_LogOut:
+                logOut();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void logOut() {
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                db.tempDAO().deleteTemps();
+                changeToMain();
+            }
+        });
     }
 
     @Override
@@ -252,6 +274,11 @@ public class ProfilBearbeitenActivity extends AppCompatActivity {
 
     public void openProfilAnsehenActivity() {
         Intent intent = new Intent(this, ProfilAnsehenActivity.class);
+        startActivity(intent);
+    }
+    public void changeToMain()
+    {
+        Intent intent = new Intent(this,MainActivity.class);
         startActivity(intent);
     }
 }

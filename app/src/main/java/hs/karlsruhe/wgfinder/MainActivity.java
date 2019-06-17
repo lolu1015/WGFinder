@@ -20,7 +20,7 @@ import java.security.NoSuchAlgorithmException;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private AppCompatButton erstelleAccountButton, loginButton, twitterButton;
+    private AppCompatButton erstelleAccountButton, loginButton;
     private AppCompatEditText email, passwort;
     WGFinderRoomDatabase db;
     private String emailTemp;
@@ -45,16 +45,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // Button wird zum onClickListener hinzugefuegt
         erstelleAccountButton.setOnClickListener(this);
         loginButton.setOnClickListener(this);
-
-    //Mit dem Facebook Button Profil aufrufen
-
-        //twitterButton = findViewById(R.id.am_b_LoginFacebook);
-        /*twitterButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openprofilAnsehenActivity();
-            }
-        });*/
     }
 
     //Zu Profil Activity wechseln
