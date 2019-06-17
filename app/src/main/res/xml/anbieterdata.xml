@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<anbieterdata>
+<anbieter>
+    <preis>40</preis>
+    <flaeche>12</flaeche>
+    <mitbewohner>2</mitbewohner>
+    <ort>Karlsruhe</ort>
+    <Raucher>Ja</Raucher>
+    <Tiere>Ja</Tiere>
+</anbieter>
+    <anbieter>
+        <preis>23</preis>
+        <flaeche>9</flaeche>
+        <mitbewohner>5</mitbewohner>
+        <ort>Karlsruhe</ort>
+        <Raucher>Ja</Raucher>
+        <Tiere>Nein</Tiere>
+    </anbieter>
+    <anbieter>
+        <preis>100</preis>
+        <flaeche>45</flaeche>
+        <mitbewohner>1</mitbewohner>
+        <ort>Karlsruhe</ort>
+        <Raucher>Nein</Raucher>
+        <Tiere>Ja</Tiere>
+    </anbieter>
+</anbieterdata>

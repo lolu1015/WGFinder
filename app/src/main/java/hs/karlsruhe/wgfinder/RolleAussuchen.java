@@ -112,7 +112,7 @@ public class RolleAussuchen extends AppCompatActivity implements View.OnClickLis
 
     public void sendMessage()
     {
-        Intent intent = new Intent(this,ProfilAnsehenActivity.class);
+        Intent intent = new Intent(this,HomeView.class);
         startActivity(intent);
     }
     public void changeToMain()

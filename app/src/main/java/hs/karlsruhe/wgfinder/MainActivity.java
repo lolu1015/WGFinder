@@ -189,7 +189,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     private void wechseleZuProfilBearbeiten() {
         //hier muss es wieder auf ProfilBearbeiten geändert werden
-        Intent intent = new Intent(this,ProfilAnsehenActivity.class);
+        Intent intent = new Intent(this,HomeView.class);
         startActivity(intent);
     }
 
