@@ -16,6 +16,8 @@ import androidx.appcompat.widget.AppCompatEditText;
 import hs.karlsruhe.wgfinder.Entity.Benutzer;
 import hs.karlsruhe.wgfinder.Entity.Login;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.regex.Pattern;
 
 public class Account_erstellen extends AppCompatActivity implements View.OnClickListener {
@@ -78,6 +80,11 @@ public class Account_erstellen extends AppCompatActivity implements View.OnClick
         Intent intent = new Intent(this,MainActivity.class);
         startActivity(intent);
     }
+    public void sendMessage()
+    {
+        Intent intent = new Intent(this,MainActivity.class);
+        startActivity(intent);
+    }
 
     public void onAccountErstellenPressed(View v){
 
@@ -92,11 +99,12 @@ public class Account_erstellen extends AppCompatActivity implements View.OnClick
         if(validateEmail() & validatePasswort() & validatePasswortEquals()
         & validateNachname() & validateVorname() & validateDatenschutz()) {
 
+            final String passwortHashed = md5(passwort);
             bn.setVorname(vorname);
             bn.setNachname(nachname);
             bn.setEmail(email);
             login.setEmail(email);
-            login.setPasswort(passwort);
+            login.setPasswort(passwortHashed);
 
             AsyncTask.execute(new Runnable() {
                 @Override
@@ -120,6 +128,7 @@ public class Account_erstellen extends AppCompatActivity implements View.OnClick
                                 Toast.makeText(Account_erstellen.this, "Account erstellt!", Toast.LENGTH_LONG).show();
                             }
                         });
+                        sendMessage();
                     }
                 }
             });
@@ -191,6 +200,24 @@ public class Account_erstellen extends AppCompatActivity implements View.OnClick
             datenschutz.setError("Datenschutzbestimmungen müssen zugestimmt werden!");
             return false;
         } else {return true;}
+    }
+    public String md5(String s) {
+        try {
+            // Create MD5 Hash
+            MessageDigest digest = java.security.MessageDigest.getInstance("MD5");
+            digest.update(s.getBytes());
+            byte messageDigest[] = digest.digest();
+
+            // Create Hex String
+            StringBuffer hexString = new StringBuffer();
+            for (int i=0; i<messageDigest.length; i++)
+                hexString.append(Integer.toHexString(0xFF & messageDigest[i]));
+            return hexString.toString();
+
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 
 
