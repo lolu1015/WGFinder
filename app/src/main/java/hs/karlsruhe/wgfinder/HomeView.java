@@ -91,7 +91,7 @@ public class HomeView extends AppCompatActivity implements View.OnClickListener,
             raucher.setText("leer");
             tiere.setText("leer");
             hobbies.setText("leer");
-            anbieterBild.setImageResource(R.drawable.ic_profil_ansehen);
+            anbieterBild.setImageResource(R.drawable.haus);
         }
 
     }
