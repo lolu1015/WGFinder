@@ -1,14 +1,9 @@
 package hs.karlsruhe.wgfinder;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Patterns;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,7 +11,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import androidx.appcompat.widget.AppCompatButton;
-import androidx.appcompat.widget.AppCompatEditText;
 
 import hs.karlsruhe.wgfinder.Entity.Benutzer;
 
@@ -78,17 +72,17 @@ public class ProfilAnsehenActivity extends AppCompatActivity {
         vornameTextView = findViewById(R.id.apa_vorname);
         alterTextView = findViewById(R.id.apa_alter);
         nachnameTextView = findViewById(R.id.apa_nachname);
-        preisTextView = findViewById(R.id.apa_preis);
-        wohflaecheTextView = findViewById(R.id.apa_wohnflaeche);
-        mitbewohnerTextView = findViewById(R.id.apa_anz_mitbewohner);
+        preisTextView = findViewById(R.id.ahv2_tv_preis);
+        wohflaecheTextView = findViewById(R.id.ahv2_tv_wohnflaeche);
+        mitbewohnerTextView = findViewById(R.id.ahv2_tv_mitbewohner);
         hobbysTextView = findViewById(R.id.apa_hobbys);
-        raucherTextView = findViewById(R.id.apa_raucherwg);
-        haustierTextView = findViewById(R.id.apa_haustiere);
-        ortTextView = findViewById(R.id.apa_ort);
+        raucherTextView = findViewById(R.id.ahv2_tv_raucher);
+        haustierTextView = findViewById(R.id.ahv2_tv_tiere);
+        ortTextView = findViewById(R.id.ahv2_tv_ort);
         geschlechtTextView = findViewById(R.id.apa_geschlecht);
 
-        profilBildView = findViewById(R.id.profilBildView);
-        //profilBildView.setImageResource(R.drawable.dino);
+        profilBildView = findViewById(R.id.ahv2_iv_bildwg);
+        profilBildView.setImageResource(R.drawable.profilbild);
 
 
         AsyncTask.execute(new Runnable() {

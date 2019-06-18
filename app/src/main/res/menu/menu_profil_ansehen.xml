@@ -12,7 +12,7 @@
     <item
         android:id="@+id/action_ProfilBearbeiten"
         android:orderInCategory="100"
-        android:title="@string/action_Profil"
+        android:title="@string/action_ProfilBearbeiten"
         android:icon="@drawable/ic_profil_bearbeiten"
         app:showAsAction="never" />
 
