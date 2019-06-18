@@ -3,6 +3,7 @@ package hs.karlsruhe.wgfinder;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.view.*;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -50,15 +51,19 @@ public class HomeView extends AppCompatActivity implements View.OnClickListener,
             @Override
             public void run() {
                 wohnungen = db.wohnungenDAO().findWohnung();
+                System.out.println("Trollolololololo"+wohnungen.get(0).getOrt());
             }
         });
         nextWohnung(0);
 
+
+
     }
 
     private void nextWohnung(Integer counter) {
+        System.out.println("Trollolololololo nextWohnung");
         //hier fehlt noch das bild
-        if(!(wohnungen == null)) {
+        if(wohnungen.size() > 0 ) {
         preis.setText(wohnungen.get(counter).getPreis().toString());
         wohnflaeche.setText(wohnungen.get(counter).getWohnflaeche().toString());
         mitbewohner.setText(wohnungen.get(counter).getMitbewohnerAnzahl().toString());
