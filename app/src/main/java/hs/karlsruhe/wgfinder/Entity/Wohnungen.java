@@ -31,6 +31,8 @@ public class Wohnungen {
 
     private Boolean tiere;
 
+    private String hobbies;
+
     public byte[] getImage() {
         return image;
     }
@@ -93,5 +95,13 @@ public class Wohnungen {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getHobbies() {
+        return hobbies;
+    }
+
+    public void setHobbies(String hobbies) {
+        this.hobbies = hobbies;
     }
 }

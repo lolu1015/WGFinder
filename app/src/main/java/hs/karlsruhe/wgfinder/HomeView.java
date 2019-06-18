@@ -3,7 +3,6 @@ package hs.karlsruhe.wgfinder;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.view.*;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,33 +13,34 @@ import hs.karlsruhe.wgfinder.Entity.Wohnungen;
 
 import java.util.List;
 
-public class HomeView extends AppCompatActivity implements View.OnClickListener, GestureDetector.OnGestureListener{
+public class HomeView extends AppCompatActivity implements View.OnClickListener, GestureDetector.OnGestureListener {
     WGFinderRoomDatabase db;
     private AppCompatImageView anbieterBild;
-    private AppCompatTextView preis, wohnflaeche, mitbewohner, ort, raucher, tiere;
+    private AppCompatTextView preis, wohnflaeche, mitbewohner, ort, raucher, tiere, hobbies;
     private List<Wohnungen> wohnungen = null;
     GestureDetector gestureDetector;
+    private Integer wohnungscounter;
 
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_view);
+        setContentView(R.layout.activity_home_view2);
         gestureDetector = new GestureDetector(HomeView.this, HomeView.this);
 
         setTitle("Suche");
         db = WGFinderRoomDatabase.getDatabase(this);
+        wohnungscounter = 0;
 
-        anbieterBild = findViewById(R.id.ahv_iv_bildwg);
-        preis = findViewById(R.id.ahv_tv_preis);
-        wohnflaeche = findViewById(R.id.ahv_tv_wohnflaeche);
-        mitbewohner = findViewById(R.id.ahv_tv_mitbewohner);
-        ort = findViewById(R.id.ahv_tv_ort);
-        raucher = findViewById(R.id.ahv_tv_raucher);
-        tiere = findViewById(R.id.ahv_tv_raucher);
+        anbieterBild = findViewById(R.id.ahv2_iv_bildwg);
+        preis = findViewById(R.id.ahv2_tv_preis);
+        wohnflaeche = findViewById(R.id.ahv2_tv_wohnflaeche);
+        mitbewohner = findViewById(R.id.ahv2_tv_mitbewohner);
+        ort = findViewById(R.id.ahv2_tv_ort);
+        raucher = findViewById(R.id.ahv2_tv_raucher);
+        tiere = findViewById(R.id.ahv2_tv_tiere);
+        hobbies = findViewById(R.id.ahv2_tv_hobbies);
 
-
-        anbieterBild.setImageResource(R.drawable.wohnung1);
 
         initializeWohnungen();
 
@@ -52,18 +52,24 @@ public class HomeView extends AppCompatActivity implements View.OnClickListener,
             public void run() {
                 wohnungen = db.wohnungenDAO().findWohnung();
                 System.out.println("Trollolololololo"+wohnungen.get(0).getOrt());
+                nextWohnung(0);
             }
         });
-        nextWohnung(0);
-
-
-
     }
 
     private void nextWohnung(Integer counter) {
         System.out.println("Trollolololololo nextWohnung");
         //hier fehlt noch das bild
-        if(!(wohnungen == null)) {
+        if(!(wohnungen == null) && !(wohnungen.size() <= counter)) {
+            if(counter == 0) {
+                anbieterBild.setImageResource(R.drawable.wohnung1);
+            }
+            if(counter == 1) {
+                anbieterBild.setImageResource(R.drawable.wohnung2);
+            }
+            if(counter == 2) {
+                anbieterBild.setImageResource(R.drawable.wohnung3);
+            }
         preis.setText(wohnungen.get(counter).getPreis().toString());
         wohnflaeche.setText(wohnungen.get(counter).getWohnflaeche().toString());
         mitbewohner.setText(wohnungen.get(counter).getMitbewohnerAnzahl().toString());
@@ -74,9 +80,18 @@ public class HomeView extends AppCompatActivity implements View.OnClickListener,
         if(wohnungen.get(counter).getTiere()) {
             tiere.setText("Ja");
         } else {tiere.setText("Nein");}
+        hobbies.setText(wohnungen.get(counter).getHobbies());
 
         } else {
-            Toast.makeText(HomeView.this, "keine Wohnungen", Toast.LENGTH_LONG).show();
+            //Toast.makeText(HomeView.this, "keine Wohnungen", Toast.LENGTH_LONG).show();
+            preis.setText("leer");
+            wohnflaeche.setText("leer");
+            mitbewohner.setText("leer");
+            ort.setText("leer");
+            raucher.setText("leer");
+            tiere.setText("leer");
+            hobbies.setText("leer");
+            anbieterBild.setImageResource(R.drawable.ic_profil_ansehen);
         }
 
     }
@@ -91,39 +106,49 @@ public class HomeView extends AppCompatActivity implements View.OnClickListener,
         wohnung1.setRaucher(true);
         wohnung1.setOrt("Karlsruhe");
         wohnung1.setMitbewohnerAnzahl(2);
+        wohnung1.setHobbies("Feiern");
+        final Wohnungen wohnung2 = new Wohnungen();
+        wohnung2.setId(2);
+        wohnung2.setPreis(345.00);
+        wohnung2.setWohnflaeche(32.23);
+        wohnung2.setTiere(false);
+        wohnung2.setRaucher(true);
+        wohnung2.setOrt("Karlsruhe");
+        wohnung2.setMitbewohnerAnzahl(5);
+        wohnung2.setHobbies("Tauchen");
+        final Wohnungen wohnung3 = new Wohnungen();
+        wohnung3.setId(3);
+        wohnung3.setPreis(3000.00);
+        wohnung3.setWohnflaeche(140.79);
+        wohnung3.setTiere(true);
+        wohnung3.setRaucher(false);
+        wohnung3.setOrt("Karlsruhe");
+        wohnung3.setMitbewohnerAnzahl(1);
+        wohnung3.setHobbies("Sport");
 
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
                 db.wohnungenDAO().deleteWohnungen();
                 db.wohnungenDAO().insertWohnung(wohnung1);
+                db.wohnungenDAO().insertWohnung(wohnung2);
+                db.wohnungenDAO().insertWohnung(wohnung3);
                 //hier kommt die Wohnung in die DB ist getestet
+                showFirstWohnung();
             }
         });
-        showFirstWohnung();
     }
 
     //#######################
     @Override
     public boolean onFling(MotionEvent motionEvent1, MotionEvent motionEvent2, float X, float Y) {
 
-        if(motionEvent1.getY() - motionEvent2.getY() > 50){
-
-            Toast.makeText(HomeView .this , " Swipe Up " , Toast.LENGTH_LONG).show();
-
-            return true;
-        }
-
-        if(motionEvent2.getY() - motionEvent1.getY() > 50){
-
-            Toast.makeText(HomeView.this , " Swipe Down " , Toast.LENGTH_LONG).show();
-
-            return true;
-        }
 
         if(motionEvent1.getX() - motionEvent2.getX() > 50){
 
             Toast.makeText(HomeView.this , " Gefällt mir nicht " , Toast.LENGTH_LONG).show();
+            wohnungscounter += 1;
+            nextWohnung(wohnungscounter);
 
 
             return true;
@@ -132,6 +157,8 @@ public class HomeView extends AppCompatActivity implements View.OnClickListener,
         if(motionEvent2.getX() - motionEvent1.getX() > 50) {
 
             Toast.makeText(HomeView.this, " Gefällt mir ", Toast.LENGTH_LONG).show();
+            wohnungscounter += 1;
+            nextWohnung(wohnungscounter);
 
             return true;
         }
