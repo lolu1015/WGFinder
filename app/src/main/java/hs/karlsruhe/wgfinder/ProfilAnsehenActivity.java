@@ -26,8 +26,45 @@ public class ProfilAnsehenActivity extends AppCompatActivity {
     private TextView beschreibungTextView, vornameTextView, nachnameTextView, preisTextView,
             wohflaecheTextView, mitbewohnerTextView, alterTextView, hobbysTextView,
             raucherTextView, haustierTextView, ortTextView, geschlechtTextView;
-    private Button bearbeitenButton;
+    private AppCompatButton zurSucheButton;
     private ImageView profilBildView;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_profil_ansehen, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.action_LogOut:
+                logOut();
+                return true;
+            case R.id.action_ProfilBearbeiten:
+                openProfilBearbeiten();
+                return true;
+
+
+                default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void openProfilBearbeiten() {
+        Intent intent = new Intent(this,ProfilBearbeitenActivity.class);
+        startActivity(intent);
+    }
+
+    private void logOut() {
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                db.tempDAO().deleteTemps();
+                changeToMain();
+            }
+        });
+    }
 
 
     @Override
@@ -51,7 +88,7 @@ public class ProfilAnsehenActivity extends AppCompatActivity {
         geschlechtTextView = findViewById(R.id.apa_geschlecht);
 
         profilBildView = findViewById(R.id.profilBildView);
-        profilBildView.setImageResource(R.drawable.dino);
+        //profilBildView.setImageResource(R.drawable.dino);
 
 
         AsyncTask.execute(new Runnable() {
@@ -117,19 +154,24 @@ public class ProfilAnsehenActivity extends AppCompatActivity {
             }
         });
 
-        bearbeitenButton = findViewById(R.id.apa_bearbeiten_button);
-        bearbeitenButton.setOnClickListener(new View.OnClickListener() {
+        zurSucheButton = findViewById(R.id.apa_zurSuche_button);
+        zurSucheButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openProfilBearbeitenActivity();
+                openHomeViewActivity();
             }
         });
 
 
     }
 
-    public void openProfilBearbeitenActivity() {
-        Intent intent = new Intent(this, ProfilBearbeitenActivity.class);
+    public void openHomeViewActivity() {
+        Intent intent = new Intent(this, HomeView.class);
+        startActivity(intent);
+    }
+    public void changeToMain()
+    {
+        Intent intent = new Intent(this,MainActivity.class);
         startActivity(intent);
     }
 

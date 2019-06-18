@@ -6,6 +6,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -30,6 +32,34 @@ public class ProfilBearbeitenActivity extends AppCompatActivity implements Popup
     private Button zurückButton;
     private EditText preisEditText,wohnflaecheEditText, mitbewohnerEditText, alterEditText, raucherEditText, haustiereEditText, ortEditText;
     private SwitchCompat raucherEditSwitch, haustiereEditSwitch;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_profil_bearbeiten, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.action_LogOut:
+                logOut();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void logOut() {
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                db.tempDAO().deleteTemps();
+                changeToMain();
+            }
+        });
+    }
+
     private TextView hobbysEditText, geschlechtEditText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -185,9 +215,10 @@ public class ProfilBearbeitenActivity extends AppCompatActivity implements Popup
                 if (oldName.getPreis() != null)
                     preisEditText.setText(oldName.getPreis().toString());
 
-
+                if (oldName.getRaucher() != null)
                 if (oldName.getRaucher())
                    raucherEditSwitch.setChecked(true);
+                if (oldName.getHaustiere() != null)
                 if (oldName.getHaustiere())
                     haustiereEditSwitch.setChecked(true);
 
@@ -331,6 +362,11 @@ public class ProfilBearbeitenActivity extends AppCompatActivity implements Popup
 
     public void openProfilAnsehenActivity() {
         Intent intent = new Intent(this, ProfilAnsehenActivity.class);
+        startActivity(intent);
+    }
+    public void changeToMain()
+    {
+        Intent intent = new Intent(this,MainActivity.class);
         startActivity(intent);
     }
 }

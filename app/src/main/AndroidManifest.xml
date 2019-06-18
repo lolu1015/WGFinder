@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ProfilHobbysActivity"></activity>
+        <activity android:name=".HomeView"/>
         <activity android:name=".ProfilBearbeitenActivity" />
         <activity android:name=".ProfilAnsehenActivity" />
         <activity android:name=".RolleAussuchen" />
