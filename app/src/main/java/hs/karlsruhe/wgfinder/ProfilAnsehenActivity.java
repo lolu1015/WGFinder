@@ -1,14 +1,9 @@
 package hs.karlsruhe.wgfinder;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Patterns;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,7 +11,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import androidx.appcompat.widget.AppCompatButton;
-import androidx.appcompat.widget.AppCompatEditText;
 
 import hs.karlsruhe.wgfinder.Entity.Benutzer;
 
@@ -88,7 +82,7 @@ public class ProfilAnsehenActivity extends AppCompatActivity {
         geschlechtTextView = findViewById(R.id.apa_geschlecht);
 
         profilBildView = findViewById(R.id.profilBildView);
-        //profilBildView.setImageResource(R.drawable.dino);
+        profilBildView.setImageResource(R.drawable.profilbild);
 
 
         AsyncTask.execute(new Runnable() {

@@ -63,7 +63,7 @@ public class HomeView extends AppCompatActivity implements View.OnClickListener,
     private void nextWohnung(Integer counter) {
         System.out.println("Trollolololololo nextWohnung");
         //hier fehlt noch das bild
-        if(wohnungen.size() > 0 ) {
+        if(!(wohnungen == null)) {
         preis.setText(wohnungen.get(counter).getPreis().toString());
         wohnflaeche.setText(wohnungen.get(counter).getWohnflaeche().toString());
         mitbewohner.setText(wohnungen.get(counter).getMitbewohnerAnzahl().toString());
