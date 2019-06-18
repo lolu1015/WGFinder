@@ -14,7 +14,7 @@ import hs.karlsruhe.wgfinder.Entity.Wohnungen;
 
 import java.util.List;
 
-public class HomeView extends AppCompatActivity implements View.OnClickListener, GestureDetector.OnGestureListener {
+public class HomeView extends AppCompatActivity implements View.OnClickListener, GestureDetector.OnGestureListener{
     WGFinderRoomDatabase db;
     private AppCompatImageView anbieterBild;
     private AppCompatTextView preis, wohnflaeche, mitbewohner, ort, raucher, tiere;
