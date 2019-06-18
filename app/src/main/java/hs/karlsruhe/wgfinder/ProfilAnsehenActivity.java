@@ -26,12 +26,12 @@ public class ProfilAnsehenActivity extends AppCompatActivity {
     private TextView beschreibungTextView, vornameTextView, nachnameTextView, preisTextView,
             wohflaecheTextView, mitbewohnerTextView, alterTextView, hobbysTextView,
             raucherTextView, haustierTextView, ortTextView, geschlechtTextView;
-    private Button bearbeitenButton;
+    private AppCompatButton zurSucheButton;
     private ImageView profilBildView;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.logged_in, menu);
+        getMenuInflater().inflate(R.menu.menu_profil_ansehen, menu);
         return true;
     }
     @Override
@@ -41,9 +41,19 @@ public class ProfilAnsehenActivity extends AppCompatActivity {
             case R.id.action_LogOut:
                 logOut();
                 return true;
-            default:
+            case R.id.action_ProfilBearbeiten:
+                openProfilBearbeiten();
+                return true;
+
+
+                default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void openProfilBearbeiten() {
+        Intent intent = new Intent(this,ProfilBearbeitenActivity.class);
+        startActivity(intent);
     }
 
     private void logOut() {
@@ -144,19 +154,19 @@ public class ProfilAnsehenActivity extends AppCompatActivity {
             }
         });
 
-        bearbeitenButton = findViewById(R.id.apa_bearbeiten_button);
-        bearbeitenButton.setOnClickListener(new View.OnClickListener() {
+        zurSucheButton = findViewById(R.id.apa_zurSuche_button);
+        zurSucheButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openProfilBearbeitenActivity();
+                openHomeViewActivity();
             }
         });
 
 
     }
 
-    public void openProfilBearbeitenActivity() {
-        Intent intent = new Intent(this, ProfilBearbeitenActivity.class);
+    public void openHomeViewActivity() {
+        Intent intent = new Intent(this, HomeView.class);
         startActivity(intent);
     }
     public void changeToMain()

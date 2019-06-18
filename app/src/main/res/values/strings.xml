@@ -22,4 +22,7 @@
     <string name="passwortVergessen">Passwort vergessen?</string>
     <string name="oder">oder</string>
     <string name="Bearbeiten">Bearbeiten</string>
+    <string name="action_ProfilBearbeiten">Profil bearbeiten</string>
+    <string name="action_Profil">Profil</string>
+    <string name="Suchen">Zur Suche</string>
 </resources>

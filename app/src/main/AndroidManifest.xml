@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="hs.karlsruhe.wgfinder">
+    package="hs.karlsruhe.wgfinder">
 
     <application
-            android:allowBackup="true"
-            android:icon="@mipmap/haus"
-            android:label="@string/app_name"
-            android:roundIcon="@mipmap/haus"
-            android:supportsRtl="true"
-            android:theme="@style/AppTheme">
-        <activity android:name=".HomeView">
-        </activity>
-        <activity android:name=".ProfilBearbeitenActivity"/>
-        <activity android:name=".ProfilAnsehenActivity"/>
-        <activity android:name=".RolleAussuchen"/>
-        <activity android:name=".Account_erstellen"/>
+        android:allowBackup="true"
+        android:icon="@mipmap/haus"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/haus"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".ProfilHobbysActivity"></activity>
+        <activity android:name=".HomeView"/>
+        <activity android:name=".ProfilBearbeitenActivity" />
+        <activity android:name=".ProfilAnsehenActivity" />
+        <activity android:name=".RolleAussuchen" />
+        <activity android:name=".Account_erstellen" />
         <activity android:name=".MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>

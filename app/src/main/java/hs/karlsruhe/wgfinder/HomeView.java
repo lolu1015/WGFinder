@@ -202,9 +202,17 @@ public class HomeView extends AppCompatActivity implements View.OnClickListener,
             case R.id.action_LogOut:
                 logOut();
                 return true;
+            case R.id.action_ProfilAnsehen:
+                changeViewProfilBearbeiten();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void changeViewProfilBearbeiten() {
+        Intent intent = new Intent(this,ProfilAnsehenActivity.class);
+        startActivity(intent);
     }
 
     private void logOut() {

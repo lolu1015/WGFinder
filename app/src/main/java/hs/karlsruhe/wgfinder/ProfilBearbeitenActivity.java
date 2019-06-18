@@ -1,33 +1,41 @@
 package hs.karlsruhe.wgfinder;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ContextMenu;
+import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.appcompat.widget.SwitchCompat;
 
 import hs.karlsruhe.wgfinder.Entity.Benutzer;
 
-public class ProfilBearbeitenActivity extends AppCompatActivity {
+public class ProfilBearbeitenActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
     WGFinderRoomDatabase db;
     private Button speichernButton;
     private Button zurückButton;
-    private EditText preisEditText,wohnflaecheEditText, mitbewohnerEditText, hobbysEditText, alterEditText, raucherEditText, haustiereEditText, ortEditText, geschlechtEditText;
+    private EditText preisEditText,wohnflaecheEditText, mitbewohnerEditText, alterEditText, raucherEditText, haustiereEditText, ortEditText;
     private SwitchCompat raucherEditSwitch, haustiereEditSwitch;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.logged_in, menu);
+        getMenuInflater().inflate(R.menu.menu_profil_bearbeiten, menu);
         return true;
     }
     @Override
@@ -52,6 +60,7 @@ public class ProfilBearbeitenActivity extends AppCompatActivity {
         });
     }
 
+    private TextView hobbysEditText, geschlechtEditText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,13 +94,23 @@ public class ProfilBearbeitenActivity extends AppCompatActivity {
             }
         });
 
-        hobbysEditText = findViewById(R.id.apb_hobbys);
+      hobbysEditText = findViewById(R.id.apb_hobbys);
         hobbysEditText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(ProfilBearbeitenActivity.this, "123", Toast.LENGTH_SHORT).show();
+                openHobbyCheckboxActivity();
             }
         });
+     /*   hobbysEditText = findViewById(R.id.apb_hobbys);
+        hobbysEditText.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                openHobbyCheckboxActivity();
+                closeKeyboard();
+                return true;
+            }
+        }); */
+
 
         alterEditText = findViewById(R.id.apb_alter);
         alterEditText.setOnClickListener(new View.OnClickListener() {
@@ -127,13 +146,25 @@ public class ProfilBearbeitenActivity extends AppCompatActivity {
             }
         });
 
+        //Optionen für das Geschlecht als PopUp Context Menu
         geschlechtEditText = findViewById(R.id.apb_geschlecht);
         geschlechtEditText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(ProfilBearbeitenActivity.this, "123", Toast.LENGTH_SHORT).show();
-            }
+           @Override
+           public void onClick(View view) {
+               showPopup(geschlechtEditText);
+           }
         });
+        //Optionen für das Geschlecht als PopUp Context Menu
+     /*   geschlechtEditText = findViewById(R.id.apb_geschlecht);
+        geschlechtEditText.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                showPopup(geschlechtEditText);
+                closeKeyboard();
+                return true;
+
+            }
+        }); */
 
         //Hier wird Switch angesteuert
         raucherEditSwitch = findViewById(R.id.apb_raucher_switch);
@@ -172,6 +203,9 @@ public class ProfilBearbeitenActivity extends AppCompatActivity {
 
    */
 
+
+
+
         //Werte, die schon in der DB sind, werden im Feld voher ausgefüllt.
 
         AsyncTask.execute(new Runnable() {
@@ -181,15 +215,69 @@ public class ProfilBearbeitenActivity extends AppCompatActivity {
                 if (oldName.getPreis() != null)
                     preisEditText.setText(oldName.getPreis().toString());
 
-
+                if (oldName.getRaucher() != null)
                 if (oldName.getRaucher())
                    raucherEditSwitch.setChecked(true);
+                if (oldName.getHaustiere() != null)
                 if (oldName.getHaustiere())
                     haustiereEditSwitch.setChecked(true);
 
 
             }
         });
+
+
+    }
+    //Damit die Tastatur nicht dauernd offen bleibt.
+    private void closeKeyboard() {
+        View view = this.getCurrentFocus();
+        if(view != null) {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
+
+
+
+    //Hier wird das PopUp angezeigt
+
+    public void  showPopup(View v){
+        PopupMenu popup = new PopupMenu(this, v);
+        popup.setOnMenuItemClickListener(this);
+        popup.inflate(R.menu.menu_geschlecht);
+        popup.show();
+    }
+
+    //Hier wird geprüft auf welches Feld geklickt wird vom Menü
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.option_1:
+                Toast.makeText(this, "männlich", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.option_2:
+                Toast.makeText(this, "weiblich", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    //Hier das Menü für Geschlecht createn
+
+   // @Override
+   // public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+   //     super.onCreateContextMenu(menu, v, menuInfo);
+   //     menu.setHeaderTitle("Geschlecht auswählen");
+   //     getMenuInflater().inflate(R.menu.menu_geschlecht, menu);
+   // }
+
+
+    // Auf Feld Hobbys klicken um auf die View zu kommen mit den Checkboxen.
+
+    public void openHobbyCheckboxActivity() {
+        Intent intent = new Intent(this, ProfilHobbysActivity.class);
+        startActivity(intent);
     }
 
 

@@ -7,11 +7,12 @@
 
     <TextView
         android:id="@+id/textView10"
+        android:drawableLeft="@drawable/ic_hobby"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="17dp"
         android:layout_marginTop="24dp"
-        android:text="Hobbys"
+        android:text=" Hobbys:"
         android:textColor="@color/colorAtrributes"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,7 +24,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="17dp"
         android:layout_marginTop="24dp"
-        android:text="Alter"
+        android:drawableLeft="@drawable/ic_alter177"
+        android:text=" Alter:"
         android:textColor="@color/colorAtrributes"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,11 +33,12 @@
 
     <TextView
         android:id="@+id/textView8"
+        android:drawableLeft="@drawable/ic_mitbewohner_neu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="17dp"
         android:layout_marginTop="24dp"
-        android:text="Mitbewohner"
+        android:text=" Mitbewohner:"
         android:textColor="@color/colorAtrributes"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,25 +46,26 @@
 
     <TextView
         android:id="@+id/textView2"
+        android:drawableLeft="@drawable/ic_wohnflaeche"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="17dp"
         android:layout_marginTop="24dp"
-        android:text="Wohnfläche:"
+        android:text=" Wohnfläche:"
         android:textColor="@color/colorAtrributes"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
-    <Button
-        android:id="@+id/apa_bearbeiten_button"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/apa_zurSuche_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:text="@string/Bearbeiten"
+        android:text="@string/Suchen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -75,7 +79,6 @@
         android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:text="TextView"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toEndOf="parent"
@@ -89,13 +92,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="TextView"
+        android:text="N/A"
         android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="@+id/guideline4" />
 
     <TextView
         android:id="@+id/textView7"
+        android:drawableStart="@drawable/ic_euro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="17dp"
@@ -112,7 +116,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
-        android:text="TextView"
+        android:text="N/A"
         android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/apa_preis" />
@@ -123,7 +127,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
-        android:text="TextView"
+        android:text="N/A"
         android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/apa_wohnflaeche" />
@@ -134,7 +138,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
-        android:text="TextView"
+        android:text="N/A"
         android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/apa_anz_mitbewohner" />
@@ -146,7 +150,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:text="TextView"
+        android:text="N/A"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
@@ -159,7 +163,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="17dp"
-        android:text="TextView"
+        android:text="N/A"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline4" />
@@ -170,7 +174,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="17dp"
-        android:text="TextView"
+        android:text="N/A"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/apa_raucherwg" />
@@ -181,7 +185,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="17dp"
-        android:text="TextView"
+        android:text="N/A"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/apa_haustiere" />
@@ -193,7 +197,7 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="17dp"
         android:layout_marginBottom="8dp"
-        android:text="TextView"
+        android:text="N/A"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
         app:layout_constraintEnd_toEndOf="parent"
@@ -204,7 +208,7 @@
         android:id="@+id/apa_vorname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="105dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="1dp"
         android:layout_marginBottom="8dp"
@@ -223,7 +227,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="105dp"
         android:layout_marginBottom="8dp"
         android:text="TextView"
         android:textSize="18sp"
@@ -259,10 +263,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <android.support.constraint.Constraints
-        android:id="@+id/constraints"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline2"
@@ -298,7 +298,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Raucher:"
+        android:drawableLeft="@drawable/ic_raucher"
+        android:text=" Raucher:"
         android:textColor="@color/colorAtrributes"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/guideline"
@@ -310,7 +311,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
-        android:text="Haustiere:"
+        android:drawableLeft="@drawable/ic_tier"
+        android:text=" Haustiere:"
         android:textColor="@color/colorAtrributes"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/guideline"
@@ -318,11 +320,12 @@
 
     <TextView
         android:id="@+id/textView13"
+        android:drawableLeft="@drawable/ic_ort"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
-        android:text="Ort:"
+        android:text=" Ort:"
         android:textColor="@color/colorAtrributes"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/guideline"
@@ -330,11 +333,12 @@
 
     <TextView
         android:id="@+id/textView14"
+        android:drawableLeft="@drawable/ic_anzahlmitbew"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
-        android:text="Geschlecht:"
+        android:text=" Geschlecht:"
         android:textColor="@color/colorAtrributes"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/guideline"
