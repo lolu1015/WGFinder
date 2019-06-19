@@ -22,16 +22,28 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" android:background="#FFFFFF">
+
             <Button
-                    android:text="Sucher"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/ara_b_Sucher" android:layout_weight="1"
-                    android:background="#47525E" android:layout_marginLeft="10dp" android:layout_marginRight="10dp"/>
+                android:id="@+id/ara_b_Sucher"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:background="#47525E"
+                android:text="Sucher"
+                android:textColor="@color/white" />
+
             <Button
-                    android:text="Anbieter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/ara_b_Anbieter" android:layout_weight="1"
-                    android:background="#47525E" android:layout_marginLeft="10dp" android:layout_marginRight="10dp"/>
+                android:id="@+id/ara_b_Anbieter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:background="#47525E"
+                android:text="Anbieter"
+                android:textColor="@color/white" />
         </LinearLayout>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

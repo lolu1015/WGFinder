@@ -2,6 +2,7 @@ package hs.karlsruhe.wgfinder;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.view.*;
 import android.widget.Toast;
@@ -11,7 +12,10 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import hs.karlsruhe.wgfinder.Entity.Wohnungen;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class HomeView extends AppCompatActivity implements View.OnClickListener, GestureDetector.OnGestureListener {
     WGFinderRoomDatabase db;
@@ -20,6 +24,9 @@ public class HomeView extends AppCompatActivity implements View.OnClickListener,
     private List<Wohnungen> wohnungen = null;
     GestureDetector gestureDetector;
     private Integer wohnungscounter;
+    SharedPreferences sp;
+    List<String> uebergabecounter = new ArrayList<>();
+
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -43,6 +50,8 @@ public class HomeView extends AppCompatActivity implements View.OnClickListener,
 
 
         initializeWohnungen();
+
+        sp = getSharedPreferences("Matches",0);
 
     }
 
@@ -145,8 +154,15 @@ public class HomeView extends AppCompatActivity implements View.OnClickListener,
 
 
         if(motionEvent1.getX() - motionEvent2.getX() > 50){
-
-            Toast.makeText(HomeView.this , " Gefällt mir nicht " , Toast.LENGTH_LONG).show();
+            Toast.makeText(HomeView.this , " Gefällt mir " , Toast.LENGTH_LONG).show();
+            SharedPreferences.Editor editor = sp.edit();
+            Set<String> set = new HashSet<String>();
+            Integer übergabe = wohnungscounter + 1;
+            uebergabecounter.add(übergabe.toString());
+            set.addAll(uebergabecounter);
+            editor.putStringSet("ID",set);
+            editor.commit();
+            //setList(wohnung.getcounter); Hier seette ich die Wohnung, die in der View angezeigt werden soll.
             wohnungscounter += 1;
             nextWohnung(wohnungscounter);
 
@@ -156,7 +172,7 @@ public class HomeView extends AppCompatActivity implements View.OnClickListener,
 
         if(motionEvent2.getX() - motionEvent1.getX() > 50) {
 
-            Toast.makeText(HomeView.this, " Gefällt mir ", Toast.LENGTH_LONG).show();
+            Toast.makeText(HomeView.this, " Gefällt mir nicht ", Toast.LENGTH_LONG).show();
             wohnungscounter += 1;
             nextWohnung(wohnungscounter);
 
@@ -232,9 +248,17 @@ public class HomeView extends AppCompatActivity implements View.OnClickListener,
             case R.id.action_ProfilAnsehen:
                 changeViewProfilBearbeiten();
                 return true;
+            case R.id.action_matches:
+                changeViewMatchesActivity();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void changeViewMatchesActivity() {
+        Intent intent = new Intent(this,MatchesActivity.class);
+        startActivity(intent);
     }
 
     private void changeViewProfilBearbeiten() {

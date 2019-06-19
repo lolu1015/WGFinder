@@ -22,4 +22,9 @@ public interface WohnungenDAO {
 
     @Query("DELETE FROM wohnung")
     void deleteWohnungen();
+
+    @Query("SELECT * FROM wohnung WHERE WohnungsId = :id")
+    Wohnungen findWohnungById(int id);
+
+
 }

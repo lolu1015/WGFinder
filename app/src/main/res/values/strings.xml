@@ -25,4 +25,5 @@
     <string name="action_ProfilBearbeiten">Profil bearbeiten</string>
     <string name="action_Profil">Profil</string>
     <string name="Suchen">Zur Suche</string>
+    <string name="action_matches">Matches</string>
 </resources>
