@@ -5,11 +5,11 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
 import androidx.appcompat.widget.AppCompatButton;
 
 import hs.karlsruhe.wgfinder.Entity.Benutzer;
@@ -28,6 +28,7 @@ public class ProfilAnsehenActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_profil_ansehen, menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
@@ -40,13 +41,13 @@ public class ProfilAnsehenActivity extends AppCompatActivity {
                 return true;
 
 
-                default:
+            default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
     private void openProfilBearbeiten() {
-        Intent intent = new Intent(this,ProfilBearbeitenActivity.class);
+        Intent intent = new Intent(this, ProfilBearbeitenActivity.class);
         startActivity(intent);
     }
 
@@ -95,53 +96,38 @@ public class ProfilAnsehenActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(ProfilAnsehenActivity.this, "Aktuelle Daten werden geladen", Toast.LENGTH_SHORT).show();
                         if (oldName.getEmail() != null)
-                        beschreibungTextView.setText(oldName.getEmail());
+                            beschreibungTextView.setText(oldName.getEmail());
                         if (oldName.getVorname() != null)
-                        vornameTextView.setText(oldName.getVorname());
+                            vornameTextView.setText(oldName.getVorname());
                         if (oldName.getNachname() != null)
-                        nachnameTextView.setText(oldName.getNachname());
-                        if(oldName.getPreis() != null)
+                            nachnameTextView.setText(oldName.getNachname());
+                        if (oldName.getPreis() != null)
                             preisTextView.setText(oldName.getPreis().toString());
-                        else
-                            Toast.makeText(ProfilAnsehenActivity.this, "Preis noch nicht da", Toast.LENGTH_SHORT).show();
-                        if(oldName.getWohnflaeche() != null)
+
+                        if (oldName.getWohnflaeche() != null)
                             wohflaecheTextView.setText(oldName.getWohnflaeche().toString());
-                        else
-                            Toast.makeText(ProfilAnsehenActivity.this, "Preis noch nicht da", Toast.LENGTH_SHORT).show();
-                        if(oldName.getAlter() != null)
-                        alterTextView.setText(oldName.getAlter().toString());
-                        else
-                            Toast.makeText(ProfilAnsehenActivity.this, "Preis ist noch null", Toast.LENGTH_SHORT).show();
-                        if(oldName.getMitbewohner() != null)
+                        if (oldName.getAlter() != null)
+                            alterTextView.setText(oldName.getAlter().toString());
+                        if (oldName.getMitbewohner() != null)
                             mitbewohnerTextView.setText(oldName.getMitbewohner().toString());
-                        else
-                            Toast.makeText(ProfilAnsehenActivity.this, "Preis ist noch null", Toast.LENGTH_SHORT).show();
-                        if(oldName.getHobbys() != null)
+                        if (oldName.getHobbys() != null)
                             hobbysTextView.setText(oldName.getHobbys());
-                        else
-                            Toast.makeText(ProfilAnsehenActivity.this, "Preis ist noch null", Toast.LENGTH_SHORT).show();
-                        if(oldName.getRaucher() != null){
-                            if(oldName.getRaucher() == true)
-                            raucherTextView.setText("Ja");
-                        else raucherTextView.setText("Nein");}
+                        if (oldName.getRaucher() != null) {
+                            if (oldName.getRaucher() == true)
+                                raucherTextView.setText("Ja");
+                            else raucherTextView.setText("Nein");
+                        }
 
-                        if(oldName.getHaustiere() != null)
-                            if(oldName.getHaustiere() == true)
-                            haustierTextView.setText("Ja");
-                        else haustierTextView.setText("Nein");
+                        if (oldName.getHaustiere() != null)
+                            if (oldName.getHaustiere() == true)
+                                haustierTextView.setText("Ja");
+                            else haustierTextView.setText("Nein");
 
-                        if(oldName.getOrt() != null)
+                        if (oldName.getOrt() != null)
                             ortTextView.setText(oldName.getOrt().toString());
-                        else
-                            Toast.makeText(ProfilAnsehenActivity.this, "Preis ist noch null", Toast.LENGTH_SHORT).show();
-                        if(oldName.getGeschlecht() != null)
+                        if (oldName.getGeschlecht() != null)
                             geschlechtTextView.setText(oldName.getGeschlecht().toString());
-                        else
-                            Toast.makeText(ProfilAnsehenActivity.this, "Preis ist noch null", Toast.LENGTH_SHORT).show();
-
-
 
                     }
                 });
@@ -163,9 +149,9 @@ public class ProfilAnsehenActivity extends AppCompatActivity {
         Intent intent = new Intent(this, HomeView.class);
         startActivity(intent);
     }
-    public void changeToMain()
-    {
-        Intent intent = new Intent(this,MainActivity.class);
+
+    public void changeToMain() {
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 

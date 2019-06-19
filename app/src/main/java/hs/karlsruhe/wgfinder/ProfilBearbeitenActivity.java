@@ -30,14 +30,17 @@ public class ProfilBearbeitenActivity extends AppCompatActivity implements Popup
     WGFinderRoomDatabase db;
     private Button speichernButton;
     private Button zurückButton;
-    private EditText preisEditText,wohnflaecheEditText, mitbewohnerEditText, alterEditText, raucherEditText, haustiereEditText, ortEditText;
+    private EditText preisEditText, wohnflaecheEditText, mitbewohnerEditText, alterEditText, raucherEditText, haustiereEditText, ortEditText;
     private SwitchCompat raucherEditSwitch, haustiereEditSwitch;
+    private String geschlecht,hobby;
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_profil_bearbeiten, menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
@@ -61,6 +64,7 @@ public class ProfilBearbeitenActivity extends AppCompatActivity implements Popup
     }
 
     private TextView hobbysEditText, geschlechtEditText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,13 +72,17 @@ public class ProfilBearbeitenActivity extends AppCompatActivity implements Popup
         db = WGFinderRoomDatabase.getDatabase(this);
         setTitle("Dein Profil bearbeiten");
 
-
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        if (bundle != null) {
+            hobby = (String) bundle.get("hobby");
+        }
 
         preisEditText = findViewById(R.id.apb_preis);
         preisEditText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(ProfilBearbeitenActivity.this, "Eingabe getätigt", Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -82,7 +90,7 @@ public class ProfilBearbeitenActivity extends AppCompatActivity implements Popup
         wohnflaecheEditText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(ProfilBearbeitenActivity.this, "123", Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -90,11 +98,11 @@ public class ProfilBearbeitenActivity extends AppCompatActivity implements Popup
         mitbewohnerEditText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(ProfilBearbeitenActivity.this, "123", Toast.LENGTH_SHORT).show();
+
             }
         });
 
-      hobbysEditText = findViewById(R.id.apb_hobbys);
+        hobbysEditText = findViewById(R.id.apb_hobbys);
         hobbysEditText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -116,11 +124,11 @@ public class ProfilBearbeitenActivity extends AppCompatActivity implements Popup
         alterEditText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(ProfilBearbeitenActivity.this, "123", Toast.LENGTH_SHORT).show();
+
             }
         });
 
-        raucherEditText = findViewById(R.id.apb_raucher);
+        /*raucherEditText = findViewById(R.id.apb_raucher);
         raucherEditText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -137,22 +145,22 @@ public class ProfilBearbeitenActivity extends AppCompatActivity implements Popup
                 Toast.makeText(ProfilBearbeitenActivity.this, "123", Toast.LENGTH_SHORT).show();
             }
         });
-
+        */
         ortEditText = findViewById(R.id.apb_ort);
         ortEditText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(ProfilBearbeitenActivity.this, "123", Toast.LENGTH_SHORT).show();
+
             }
         });
 
         //Optionen für das Geschlecht als PopUp Context Menu
         geschlechtEditText = findViewById(R.id.apb_geschlecht);
         geschlechtEditText.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View view) {
-               showPopup(geschlechtEditText);
-           }
+            @Override
+            public void onClick(View view) {
+                showPopup(geschlechtEditText);
+            }
         });
         //Optionen für das Geschlecht als PopUp Context Menu
      /*   geschlechtEditText = findViewById(R.id.apb_geschlecht);
@@ -204,8 +212,6 @@ public class ProfilBearbeitenActivity extends AppCompatActivity implements Popup
    */
 
 
-
-
         //Werte, die schon in der DB sind, werden im Feld voher ausgefüllt.
 
         AsyncTask.execute(new Runnable() {
@@ -214,34 +220,56 @@ public class ProfilBearbeitenActivity extends AppCompatActivity implements Popup
                 final Benutzer oldName = db.benutzerDAO().getLastName();
                 if (oldName.getPreis() != null)
                     preisEditText.setText(oldName.getPreis().toString());
-
+                if (oldName.getWohnflaeche() != null)
+                    wohnflaecheEditText.setText(oldName.getWohnflaeche().toString());
+                if (oldName.getMitbewohner() != null)
+                    mitbewohnerEditText.setText(oldName.getMitbewohner().toString());
+                if (oldName.getAlter() != null)
+                    alterEditText.setText(oldName.getAlter().toString());
                 if (oldName.getRaucher() != null)
-                if (oldName.getRaucher())
-                   raucherEditSwitch.setChecked(true);
+                    if (oldName.getRaucher())
+                        raucherEditSwitch.setChecked(true);
                 if (oldName.getHaustiere() != null)
-                if (oldName.getHaustiere())
-                    haustiereEditSwitch.setChecked(true);
+                    if (oldName.getHaustiere())
+                        haustiereEditSwitch.setChecked(true);
+                if (oldName.getOrt() != null)
+                    ortEditText.setText(oldName.getOrt().toString());
+                if (oldName.getGeschlecht() != null)
+                    geschlechtEditText.setText(oldName.getGeschlecht().toString());
+                if (oldName.getHobbys() != null)
+                    hobbysEditText.setText(oldName.getHobbys().toString());
 
 
             }
         });
 
 
+        if (hobby != null)
+            hobbysEditText.setText(hobby);
+
     }
+
+
+ /*   @Override
+    public void onResume() {
+        if (hobby != null)
+            hobbysEditText.setText(hobby);
+        super.onResume();
+    }  */
+
     //Damit die Tastatur nicht dauernd offen bleibt.
     private void closeKeyboard() {
         View view = this.getCurrentFocus();
-        if(view != null) {
-            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
 
 
-
     //Hier wird das PopUp angezeigt
 
-    public void  showPopup(View v){
+    public void showPopup(View v) {
         PopupMenu popup = new PopupMenu(this, v);
         popup.setOnMenuItemClickListener(this);
         popup.inflate(R.menu.menu_geschlecht);
@@ -253,10 +281,15 @@ public class ProfilBearbeitenActivity extends AppCompatActivity implements Popup
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.option_1:
-                Toast.makeText(this, "männlich", Toast.LENGTH_SHORT).show();
+
+                geschlecht = "M";
+                geschlechtEditText.setText("M");
+
                 return true;
             case R.id.option_2:
-                Toast.makeText(this, "weiblich", Toast.LENGTH_SHORT).show();
+
+                geschlecht = "W";
+                geschlechtEditText.setText("W");
                 return true;
             default:
                 return false;
@@ -265,12 +298,12 @@ public class ProfilBearbeitenActivity extends AppCompatActivity implements Popup
 
     //Hier das Menü für Geschlecht createn
 
-   // @Override
-   // public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-   //     super.onCreateContextMenu(menu, v, menuInfo);
-   //     menu.setHeaderTitle("Geschlecht auswählen");
-   //     getMenuInflater().inflate(R.menu.menu_geschlecht, menu);
-   // }
+    // @Override
+    // public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+    //     super.onCreateContextMenu(menu, v, menuInfo);
+    //     menu.setHeaderTitle("Geschlecht auswählen");
+    //     getMenuInflater().inflate(R.menu.menu_geschlecht, menu);
+    // }
 
 
     // Auf Feld Hobbys klicken um auf die View zu kommen mit den Checkboxen.
@@ -281,92 +314,96 @@ public class ProfilBearbeitenActivity extends AppCompatActivity implements Popup
     }
 
 
-
-   public void onSaveButtonPressed(){
-
-
-       AsyncTask.execute((new Runnable() {
-           @Override
-           public void run() {
-               final Benutzer oldName = db.benutzerDAO().getLastName();
-
-               if(TextUtils.isEmpty(preisEditText.getText()))   // Wenn in das Textfeld nichts eingetragen wurde ...
-               oldName.setPreis(Integer.parseInt(oldName.getPreis().toString())); //dann wird der aktuelle Wert angenommen (TODO; auf Null prüfen)
-               else oldName.setPreis(Integer.parseInt(preisEditText.getText().toString())); //wenn etwas eingetragen ist wird dies übernommen
+    public void onSaveButtonPressed() {
 
 
-               if(TextUtils.isEmpty(wohnflaecheEditText.getText()))
-               oldName.setWohnflaeche(Integer.parseInt(oldName.getWohnflaeche().toString()));
-               else oldName.setWohnflaeche(Integer.parseInt(wohnflaecheEditText.getText().toString()));
+        AsyncTask.execute((new Runnable() {
+            @Override
+            public void run() {
+                final Benutzer oldName = db.benutzerDAO().getLastName();
 
+                if (oldName.getPreis() != null) {
+                    if (TextUtils.isEmpty(preisEditText.getText()))   // Wenn in das Textfeld nichts eingetragen wurde ...
+                        oldName.setPreis(Integer.parseInt(oldName.getPreis().toString())); //dann wird der aktuelle Wert angenommen (TODO; auf Null prüfen)
+                    else
+                        oldName.setPreis(Integer.parseInt(preisEditText.getText().toString())); //wenn etwas eingetragen ist wird dies übernommen
+                }
+                if (oldName.getWohnflaeche() != null) {
+                    if (TextUtils.isEmpty(wohnflaecheEditText.getText()))
+                        oldName.setWohnflaeche(Integer.parseInt(oldName.getWohnflaeche().toString()));
+                    else
+                        oldName.setWohnflaeche(Integer.parseInt(wohnflaecheEditText.getText().toString()));
+                }
+                if (oldName.getMitbewohner() != null) {
+                    if (TextUtils.isEmpty(mitbewohnerEditText.getText()))
+                        oldName.setMitbewohner(Integer.parseInt((oldName.getMitbewohner().toString())));
+                    else
+                        oldName.setMitbewohner(Integer.parseInt(mitbewohnerEditText.getText().toString()));
+                }
 
-               if(TextUtils.isEmpty(mitbewohnerEditText.getText()))
-               oldName.setMitbewohner(Integer.parseInt((oldName.getMitbewohner().toString())));
-               else oldName.setMitbewohner(Integer.parseInt(mitbewohnerEditText.getText().toString()));
+                if (oldName.getHobbys() != null) {
+                    if (TextUtils.isEmpty(hobbysEditText.getText()))
+                        oldName.setHobbys(oldName.getHobbys());
+                    else oldName.setHobbys(hobbysEditText.getText().toString());
+                }
+                if (oldName.getAlter() != null) {
+                    if (TextUtils.isEmpty(alterEditText.getText()))
+                        oldName.setAlter(Integer.parseInt(oldName.getAlter().toString()));
+                    else oldName.setAlter(Integer.parseInt(alterEditText.getText().toString()));
+                }
 
-
-               if(TextUtils.isEmpty(hobbysEditText.getText()))
-               oldName.setHobbys(oldName.getHobbys());
-               else oldName.setHobbys(hobbysEditText.getText().toString());
-
-               if(TextUtils.isEmpty(alterEditText.getText()))
-               oldName.setAlter(Integer.parseInt(oldName.getAlter().toString()));
-               else oldName.setAlter(Integer.parseInt(alterEditText.getText().toString()));
-
-
-
-              // if(TextUtils.isEmpty(raucherEditText.getText()))
-              //     oldName.setRaucher(oldName.getRaucher());
-              // else oldName.setRaucher(raucherEditText.getText().toString());
+                // if(TextUtils.isEmpty(raucherEditText.getText()))
+                //     oldName.setRaucher(oldName.getRaucher());
+                // else oldName.setRaucher(raucherEditText.getText().toString());
 
 
                 if (raucherEditSwitch.isChecked())
                     oldName.setRaucher(true);
                 else oldName.setRaucher(false);
 
-               if (haustiereEditSwitch.isChecked())
-                   oldName.setHaustiere(true);
-               else oldName.setHaustiere(false);
+                if (haustiereEditSwitch.isChecked())
+                    oldName.setHaustiere(true);
+                else oldName.setHaustiere(false);
 
-              // if(TextUtils.isEmpty(haustiereEditText.getText()))
-              //     oldName.setHaustiere(oldName.getHaustiere());
-              // else oldName.setHaustiere(haustiereEditText.getText().toString());
+                // if(TextUtils.isEmpty(haustiereEditText.getText()))
+                //     oldName.setHaustiere(oldName.getHaustiere());
+                // else oldName.setHaustiere(haustiereEditText.getText().toString());
 
-
-
-               if(TextUtils.isEmpty(ortEditText.getText()))
-                   oldName.setOrt(oldName.getOrt());
-               else oldName.setOrt(ortEditText.getText().toString());
-
-
-
-               if(TextUtils.isEmpty(geschlechtEditText.getText()))
-                   oldName.setGeschlecht(oldName.getGeschlecht());
-               else oldName.setGeschlecht(geschlechtEditText.getText().toString());
+                if (oldName.getOrt() != null) {
+                    if (TextUtils.isEmpty(ortEditText.getText()))
+                        oldName.setOrt(oldName.getOrt());
+                    else oldName.setOrt(ortEditText.getText().toString());
+                }
 
 
-               AsyncTask.execute(new Runnable() {
-                   @Override
-                   public void run() {
-                       db.benutzerDAO().updateBenutzer(oldName);
-                   }
-               });
-           }
+                if (geschlecht != null)
+                        oldName.setGeschlecht(geschlecht);
 
 
+                if (hobby != null)
+                    oldName.setHobbys(hobby);
 
-       }));
+                AsyncTask.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        db.benutzerDAO().updateBenutzer(oldName);
+                    }
+                });
+            }
 
-       openProfilAnsehenActivity();
-   }
+
+        }));
+
+        openProfilAnsehenActivity();
+    }
 
     public void openProfilAnsehenActivity() {
         Intent intent = new Intent(this, ProfilAnsehenActivity.class);
         startActivity(intent);
     }
-    public void changeToMain()
-    {
-        Intent intent = new Intent(this,MainActivity.class);
+
+    public void changeToMain() {
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 }

@@ -217,18 +217,20 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="20dp"
+        android:background="?attr/editTextBackground"
         android:ems="10"
+        android:gravity="center_vertical"
         android:hint="Geschlecht"
         android:inputType="none"
         android:onClick="showPopup"
+        android:textColor="?attr/editTextColor"
         android:textSize="18sp"
         android:windowSoftInputMode="stateAlwaysHidden|adjustNothing"
+        app:layout_constraintBottom_toTopOf="@+id/apb_speichern"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline7"
-        app:layout_constraintTop_toBottomOf="@+id/apb_ort"
-        android:textColor="?attr/editTextColor"
-        android:background="?attr/editTextBackground"
-        android:gravity="center_vertical"/>
+        app:layout_constraintTop_toBottomOf="@+id/apb_ort" />
 
     <TextView
         android:id="@+id/apb_hobbys"
@@ -251,28 +253,17 @@
         />
 
     <EditText
-        android:id="@+id/apb_haustiere"
-        android:layout_width="20dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:hint="Haustiere"
-        android:inputType="text"
-        app:layout_constraintStart_toStartOf="@+id/guideline7"
-        app:layout_constraintTop_toBottomOf="@+id/apb_raucher" />
-
-    <EditText
         android:id="@+id/apb_ort"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="19dp"
         android:layout_marginEnd="8dp"
         android:ems="10"
         android:hint="Ort"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline7"
-        app:layout_constraintTop_toBottomOf="@+id/apb_haustiere" />
+        app:layout_constraintTop_toBottomOf="@+id/apb_haustiere_switch" />
 
     <EditText
         android:id="@+id/apb_mitbewohner"
@@ -286,17 +277,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline7"
         app:layout_constraintTop_toBottomOf="@+id/apb_wohnflaeche" />
-
-    <EditText
-        android:id="@+id/apb_raucher"
-        android:layout_width="20dp"
-        android:layout_height="44dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:hint="Raucher"
-        android:inputType="text"
-        app:layout_constraintStart_toStartOf="@+id/guideline7"
-        app:layout_constraintTop_toBottomOf="@+id/apb_hobbys" />
 
     <EditText
         android:id="@+id/apb_alter"
@@ -452,7 +432,7 @@
         android:textOff="NEIN"
         android:textOn="JA"
         app:layout_constraintEnd_toEndOf="@+id/barrier"
-        app:layout_constraintStart_toEndOf="@+id/apb_raucher"
+        app:layout_constraintStart_toStartOf="@+id/guideline7"
         app:layout_constraintTop_toBottomOf="@+id/apb_hobbys"
         app:showText="true"
         app:splitTrack="true" />
@@ -469,7 +449,7 @@
         android:textOn="JA"
         app:layout_constraintBottom_toTopOf="@+id/apb_ort"
         app:layout_constraintEnd_toEndOf="@+id/barrier"
-        app:layout_constraintStart_toEndOf="@+id/apb_haustiere"
+        app:layout_constraintStart_toStartOf="@+id/guideline7"
         app:layout_constraintTop_toBottomOf="@+id/apb_raucher_switch"
         app:layout_constraintVertical_bias="0.153"
         app:showText="true"
