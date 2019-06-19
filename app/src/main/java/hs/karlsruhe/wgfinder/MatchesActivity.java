@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.service.autofill.FieldClassification;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
@@ -14,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -26,7 +28,7 @@ public class MatchesActivity extends AppCompatActivity {
     SharedPreferences sp;
     List<String> title = new ArrayList<>();
     List<String> description = new ArrayList<>();
-    ArrayList<Integer> pictures = new ArrayList<>();
+    int[] pictures = {R.drawable.wohnung1,R.drawable.wohnung2,R.drawable.wohnung3};
 
     String[] from = {"image","title","description"};
     int[] to = {R.id.lim_image,R.id.lim_title,R.id.lim_description};
@@ -41,14 +43,11 @@ public class MatchesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_matches_activity);
         setTitle("Deine Matches");
-        db = WGFinderRoomDatabase.getDatabase(this);
-        sp = getSharedPreferences("Matches",0);
-        final Set<String> set = sp.getStringSet("ID",null);
 
-        if (set.iterator() != null) {
-           for(final String s: set) {
 
-               AsyncTask.execute(new Runnable() {
+       new dbabfragetask().execute();
+
+          /*     AsyncTask.execute(new Runnable() {
                    @Override
                    public void run() {
                        Wohnungen wohnung = db.wohnungenDAO().findWohnungById(Integer.parseInt(s)); //Integer.parseInt(set.iterator().next())
@@ -56,33 +55,27 @@ public class MatchesActivity extends AppCompatActivity {
                        description.add(wohnung.getPreis().toString());
                        pictures.add(R.drawable.wohnung1);
                    }
+                   @Override
+                   protected void onPostExecute() {
+
+                   }
                });
 
+
+           */
 
 
 
             }
-        }
 
 
 
 
 
 
-        for(int i =0;i<title.size();i++) {
-            HashMap<String,String> hashMap = new HashMap<>();
-            hashMap.put("image",Integer.toString(pictures.get(i)));
-            hashMap.put("title",title.get(i));
-            hashMap.put("description",description.get(i));
-            matchList.add(hashMap);
-        }
 
 
 
-        matchesListView = (ListView)findViewById(R.id.ama_matches_liste);
-        SimpleAdapter simpleAdapter = new SimpleAdapter(MatchesActivity.this, matchList, R.layout.list_item_matches,from,to);
-        matchesListView.setAdapter(simpleAdapter);
-    }
 
 
 
@@ -125,6 +118,9 @@ public class MatchesActivity extends AppCompatActivity {
             @Override
             public void run() {
                 db.tempDAO().deleteTemps();
+                SharedPreferences.Editor editor = sp.edit();
+                editor.putStringSet("ID",new HashSet<String>());
+                editor.commit();
                 changeToMain();
             }
         });
@@ -133,6 +129,51 @@ public class MatchesActivity extends AppCompatActivity {
     {
         Intent intent = new Intent(this,MainActivity.class);
         startActivity(intent);
+    }
+
+
+    //BLA
+    private class dbabfragetask extends AsyncTask<Void, Void, Void>{
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            db = WGFinderRoomDatabase.getDatabase(MatchesActivity.this);
+            sp = getSharedPreferences("Matches", 0);
+            final Set<String> set = sp.getStringSet("ID", null);
+            if (set != null) {
+                for (final String s : set) {
+
+
+                    Wohnungen wohnung = db.wohnungenDAO().findWohnungById(Integer.parseInt(s));
+                    if (wohnung != null) {
+                        title.add(wohnung.getOrt());
+                        description.add(wohnung.getPreis().toString());
+
+                    }
+
+
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void param){
+            for(int i =0;i<title.size();i++) {
+                HashMap<String,String> hashMap = new HashMap<>();
+                hashMap.put("image",Integer.toString(pictures[i]));
+                hashMap.put("title",title.get(i));
+                hashMap.put("description",description.get(i));
+                matchList.add(hashMap);
+            }
+
+
+
+            matchesListView = (ListView)findViewById(R.id.ama_matches_liste);
+            SimpleAdapter simpleAdapter = new SimpleAdapter(MatchesActivity.this, matchList, R.layout.list_item_matches,from,to);
+            matchesListView.setAdapter(simpleAdapter);
+
+        }
     }
 
 

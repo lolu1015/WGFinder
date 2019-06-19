@@ -158,7 +158,9 @@ public class HomeView extends AppCompatActivity implements View.OnClickListener,
             SharedPreferences.Editor editor = sp.edit();
             Set<String> set = new HashSet<String>();
             Integer übergabe = wohnungscounter + 1;
-            uebergabecounter.add(übergabe.toString());
+            if (!uebergabecounter.contains(übergabe)) {
+                uebergabecounter.add(übergabe.toString());
+            }
             set.addAll(uebergabecounter);
             editor.putStringSet("ID",set);
             editor.commit();
@@ -173,6 +175,15 @@ public class HomeView extends AppCompatActivity implements View.OnClickListener,
         if(motionEvent2.getX() - motionEvent1.getX() > 50) {
 
             Toast.makeText(HomeView.this, " Gefällt mir nicht ", Toast.LENGTH_LONG).show();
+            Integer übergabe = wohnungscounter + 1;
+            if (uebergabecounter.contains(übergabe)) {
+                Set<String> set = new HashSet<String>();
+                SharedPreferences.Editor editor = sp.edit();
+                uebergabecounter.remove(übergabe.toString());
+                set.addAll(uebergabecounter);
+                editor.putStringSet("ID",set);
+                editor.commit();
+            }
             wohnungscounter += 1;
             nextWohnung(wohnungscounter);
 
@@ -271,6 +282,9 @@ public class HomeView extends AppCompatActivity implements View.OnClickListener,
             @Override
             public void run() {
                 db.tempDAO().deleteTemps();
+                SharedPreferences.Editor editor = sp.edit();
+                editor.putStringSet("ID",new HashSet<String>());
+                editor.commit();
                 changeToMain();
             }
         });
