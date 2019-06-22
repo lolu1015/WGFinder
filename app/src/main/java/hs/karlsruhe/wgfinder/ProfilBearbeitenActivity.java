@@ -2,6 +2,7 @@ package hs.karlsruhe.wgfinder;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.InputType;
@@ -24,7 +25,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.appcompat.widget.SwitchCompat;
 
+import java.util.HashSet;
+
 import hs.karlsruhe.wgfinder.Entity.Benutzer;
+import hs.karlsruhe.wgfinder.Entity.Temp;
 
 public class ProfilBearbeitenActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
     WGFinderRoomDatabase db;
@@ -33,6 +37,7 @@ public class ProfilBearbeitenActivity extends AppCompatActivity implements Popup
     private EditText preisEditText, wohnflaecheEditText, mitbewohnerEditText, alterEditText, raucherEditText, haustiereEditText, ortEditText;
     private SwitchCompat raucherEditSwitch, haustiereEditSwitch;
     private String geschlecht,hobby;
+    SharedPreferences sp;
 
 
     @Override
@@ -58,6 +63,9 @@ public class ProfilBearbeitenActivity extends AppCompatActivity implements Popup
             @Override
             public void run() {
                 db.tempDAO().deleteTemps();
+                SharedPreferences.Editor editor = sp.edit();
+                editor.putStringSet("ID",new HashSet<String>());
+                editor.commit();
                 changeToMain();
             }
         });
@@ -217,7 +225,8 @@ public class ProfilBearbeitenActivity extends AppCompatActivity implements Popup
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
-                final Benutzer oldName = db.benutzerDAO().getLastName();
+                final String aktuellerUser = db.tempDAO().findTemp();
+                final Benutzer oldName = db.benutzerDAO().findBenutzer(aktuellerUser);
                 if (oldName.getPreis() != null)
                     preisEditText.setText(oldName.getPreis().toString());
                 if (oldName.getWohnflaeche() != null)
@@ -309,6 +318,7 @@ public class ProfilBearbeitenActivity extends AppCompatActivity implements Popup
     // Auf Feld Hobbys klicken um auf die View zu kommen mit den Checkboxen.
 
     public void openHobbyCheckboxActivity() {
+        onSaveButtonPressed();
         Intent intent = new Intent(this, ProfilHobbysActivity.class);
         startActivity(intent);
     }
@@ -320,37 +330,40 @@ public class ProfilBearbeitenActivity extends AppCompatActivity implements Popup
         AsyncTask.execute((new Runnable() {
             @Override
             public void run() {
-                final Benutzer oldName = db.benutzerDAO().getLastName();
+                final String aktuellerUser = db.tempDAO().findTemp();
+                final Benutzer oldName = db.benutzerDAO().findBenutzer(aktuellerUser);
 
-                if (oldName.getPreis() != null) {
-                    if (TextUtils.isEmpty(preisEditText.getText()))   // Wenn in das Textfeld nichts eingetragen wurde ...
+
+                    if (TextUtils.isEmpty(preisEditText.getText())){   // Wenn in das Textfeld nichts eingetragen wurde ...
                         oldName.setPreis(Integer.parseInt(oldName.getPreis().toString())); //dann wird der aktuelle Wert angenommen (TODO; auf Null prüfen)
-                    else
+                   }
+                    else{
                         oldName.setPreis(Integer.parseInt(preisEditText.getText().toString())); //wenn etwas eingetragen ist wird dies übernommen
-                }
-                if (oldName.getWohnflaeche() != null) {
+                        }
+
+
                     if (TextUtils.isEmpty(wohnflaecheEditText.getText()))
                         oldName.setWohnflaeche(Integer.parseInt(oldName.getWohnflaeche().toString()));
                     else
                         oldName.setWohnflaeche(Integer.parseInt(wohnflaecheEditText.getText().toString()));
-                }
-                if (oldName.getMitbewohner() != null) {
+
+
                     if (TextUtils.isEmpty(mitbewohnerEditText.getText()))
                         oldName.setMitbewohner(Integer.parseInt((oldName.getMitbewohner().toString())));
                     else
                         oldName.setMitbewohner(Integer.parseInt(mitbewohnerEditText.getText().toString()));
-                }
 
-                if (oldName.getHobbys() != null) {
+
+
                     if (TextUtils.isEmpty(hobbysEditText.getText()))
                         oldName.setHobbys(oldName.getHobbys());
                     else oldName.setHobbys(hobbysEditText.getText().toString());
-                }
-                if (oldName.getAlter() != null) {
+
+
                     if (TextUtils.isEmpty(alterEditText.getText()))
                         oldName.setAlter(Integer.parseInt(oldName.getAlter().toString()));
                     else oldName.setAlter(Integer.parseInt(alterEditText.getText().toString()));
-                }
+
 
                 // if(TextUtils.isEmpty(raucherEditText.getText()))
                 //     oldName.setRaucher(oldName.getRaucher());
@@ -369,11 +382,11 @@ public class ProfilBearbeitenActivity extends AppCompatActivity implements Popup
                 //     oldName.setHaustiere(oldName.getHaustiere());
                 // else oldName.setHaustiere(haustiereEditText.getText().toString());
 
-                if (oldName.getOrt() != null) {
+
                     if (TextUtils.isEmpty(ortEditText.getText()))
                         oldName.setOrt(oldName.getOrt());
                     else oldName.setOrt(ortEditText.getText().toString());
-                }
+
 
 
                 if (geschlecht != null)

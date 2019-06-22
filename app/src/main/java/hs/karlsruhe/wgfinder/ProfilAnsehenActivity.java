@@ -1,6 +1,7 @@
 package hs.karlsruhe.wgfinder;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -12,6 +13,8 @@ import android.view.View;
 
 import androidx.appcompat.widget.AppCompatButton;
 
+import java.util.HashSet;
+
 import hs.karlsruhe.wgfinder.Entity.Benutzer;
 
 public class ProfilAnsehenActivity extends AppCompatActivity {
@@ -22,6 +25,7 @@ public class ProfilAnsehenActivity extends AppCompatActivity {
             raucherTextView, haustierTextView, ortTextView, geschlechtTextView;
     private AppCompatButton zurSucheButton;
     private ImageView profilBildView;
+    SharedPreferences sp;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -56,7 +60,11 @@ public class ProfilAnsehenActivity extends AppCompatActivity {
             @Override
             public void run() {
                 db.tempDAO().deleteTemps();
+                SharedPreferences.Editor editor = sp.edit();
+                editor.putStringSet("ID",new HashSet<String>());
+                editor.commit();
                 changeToMain();
+
             }
         });
     }
@@ -68,6 +76,7 @@ public class ProfilAnsehenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profil_ansehen);
         setTitle("Dein Profil");
+        sp = getSharedPreferences("Matches", 0);
 
         beschreibungTextView = findViewById(R.id.apa_beschreibung);
         vornameTextView = findViewById(R.id.apa_vorname);
@@ -90,7 +99,9 @@ public class ProfilAnsehenActivity extends AppCompatActivity {
             @Override
             public void run() {
                 //zuletzt gespeicherten Namen aus Datenbank holen
-                final Benutzer oldName = db.benutzerDAO().getLastName();
+                final String aktuellerUser = db.tempDAO().findTemp();
+                final Benutzer oldName = db.benutzerDAO().findBenutzer(aktuellerUser);
+
 
                 //Lade den Namen in die TextView
                 runOnUiThread(new Runnable() {

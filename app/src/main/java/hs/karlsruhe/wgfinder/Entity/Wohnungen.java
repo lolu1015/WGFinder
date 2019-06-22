@@ -33,6 +33,17 @@ public class Wohnungen {
 
     private String hobbies;
 
+    private String beschreibung;
+
+
+    public String getBeschreibung() {
+        return beschreibung;
+    }
+
+    public void setBeschreibung(String beschreibung) {
+        this.beschreibung = beschreibung;
+    }
+
     public byte[] getImage() {
         return image;
     }

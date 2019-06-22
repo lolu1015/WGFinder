@@ -43,7 +43,7 @@ public class MatchesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_matches_activity);
         setTitle("Deine Matches");
-
+        sp = getSharedPreferences("Matches", 0);
 
        new dbabfragetask().execute();
 
@@ -138,7 +138,6 @@ public class MatchesActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
             db = WGFinderRoomDatabase.getDatabase(MatchesActivity.this);
-            sp = getSharedPreferences("Matches", 0);
             final Set<String> set = sp.getStringSet("ID", null);
             if (set != null) {
                 for (final String s : set) {
@@ -147,7 +146,7 @@ public class MatchesActivity extends AppCompatActivity {
                     Wohnungen wohnung = db.wohnungenDAO().findWohnungById(Integer.parseInt(s));
                     if (wohnung != null) {
                         title.add(wohnung.getOrt());
-                        description.add(wohnung.getPreis().toString());
+                        description.add(wohnung.getBeschreibung().toString());
 
                     }
 

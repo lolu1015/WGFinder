@@ -29,7 +29,7 @@ import hs.karlsruhe.wgfinder.Entity.Wohnungen;
                     INSTANCE =
                             Room.databaseBuilder(context.getApplicationContext(),
                                     WGFinderRoomDatabase.class,
-                                    "wgfinder16_database").build();
+                                    "wgfinder18_database").build();
                 }
             }
         }

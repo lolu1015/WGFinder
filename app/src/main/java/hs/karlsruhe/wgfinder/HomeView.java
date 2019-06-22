@@ -34,6 +34,7 @@ public class HomeView extends AppCompatActivity implements View.OnClickListener,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_view2);
         gestureDetector = new GestureDetector(HomeView.this, HomeView.this);
+        sp = getSharedPreferences("Matches", 0);
 
         setTitle("Suche");
         db = WGFinderRoomDatabase.getDatabase(this);
@@ -116,6 +117,7 @@ public class HomeView extends AppCompatActivity implements View.OnClickListener,
         wohnung1.setOrt("Karlsruhe");
         wohnung1.setMitbewohnerAnzahl(2);
         wohnung1.setHobbies("Feiern");
+        wohnung1.setBeschreibung("Wir als feierfreudige WG suchen einen neuen Mitbewohner, der gerne feriert.");
         final Wohnungen wohnung2 = new Wohnungen();
         wohnung2.setId(2);
         wohnung2.setPreis(345.00);
@@ -125,6 +127,7 @@ public class HomeView extends AppCompatActivity implements View.OnClickListener,
         wohnung2.setOrt("Karlsruhe");
         wohnung2.setMitbewohnerAnzahl(5);
         wohnung2.setHobbies("Tauchen");
+        wohnung2.setBeschreibung("Wir sind Studenten am KIT und sind alle in der Tauchergruppe und suchen einen neuen Mitbewohner, der dieses Hobby mit uns teilt");
         final Wohnungen wohnung3 = new Wohnungen();
         wohnung3.setId(3);
         wohnung3.setPreis(3000.00);
@@ -134,6 +137,7 @@ public class HomeView extends AppCompatActivity implements View.OnClickListener,
         wohnung3.setOrt("Karlsruhe");
         wohnung3.setMitbewohnerAnzahl(1);
         wohnung3.setHobbies("Sport");
+        wohnung3.setBeschreibung("Wir sind eine Luxus-WG und suchen einen Mitbewohner, der gerne Sport treibt und sich gerne zu einem teuern Whisky am Abend zu uns gesellt. ");
 
         AsyncTask.execute(new Runnable() {
             @Override
