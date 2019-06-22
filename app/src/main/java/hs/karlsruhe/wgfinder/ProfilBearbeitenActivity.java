@@ -32,13 +32,13 @@ import hs.karlsruhe.wgfinder.Entity.Temp;
 
 public class ProfilBearbeitenActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
     WGFinderRoomDatabase db;
+    SharedPreferences sp;
     private Button speichernButton;
     private Button zurückButton;
     private EditText preisEditText, wohnflaecheEditText, mitbewohnerEditText, alterEditText, raucherEditText, haustiereEditText, ortEditText;
     private SwitchCompat raucherEditSwitch, haustiereEditSwitch;
     private String geschlecht,hobby;
-    SharedPreferences sp;
-
+    private TextView hobbysEditText, geschlechtEditText;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -70,8 +70,6 @@ public class ProfilBearbeitenActivity extends AppCompatActivity implements Popup
             }
         });
     }
-
-    private TextView hobbysEditText, geschlechtEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -335,24 +333,27 @@ public class ProfilBearbeitenActivity extends AppCompatActivity implements Popup
 
 
                     if (TextUtils.isEmpty(preisEditText.getText())){   // Wenn in das Textfeld nichts eingetragen wurde ...
-                        oldName.setPreis(Integer.parseInt(oldName.getPreis().toString())); //dann wird der aktuelle Wert angenommen (TODO; auf Null prüfen)
+                        oldName.setPreis(oldName.getPreis()); //dann wird der aktuelle Wert angenommen (TODO; auf Null prüfen)
                    }
                     else{
-                        oldName.setPreis(Integer.parseInt(preisEditText.getText().toString())); //wenn etwas eingetragen ist wird dies übernommen
+                        if(preisEditText.getText() != null)
+                        oldName.setPreis(Integer.parseInt(String.valueOf(preisEditText.getText()))); //wenn etwas eingetragen ist wird dies übernommen
                         }
 
 
                     if (TextUtils.isEmpty(wohnflaecheEditText.getText()))
-                        oldName.setWohnflaeche(Integer.parseInt(oldName.getWohnflaeche().toString()));
-                    else
-                        oldName.setWohnflaeche(Integer.parseInt(wohnflaecheEditText.getText().toString()));
-
+                        oldName.setWohnflaeche(oldName.getWohnflaeche());
+                    else {
+                        if (wohnflaecheEditText.getText() != null)
+                            oldName.setWohnflaeche(Integer.parseInt(wohnflaecheEditText.getText().toString()));
+                    }
 
                     if (TextUtils.isEmpty(mitbewohnerEditText.getText()))
-                        oldName.setMitbewohner(Integer.parseInt((oldName.getMitbewohner().toString())));
-                    else
+                        oldName.setMitbewohner(oldName.getMitbewohner());
+                    else {
+                        if(mitbewohnerEditText.getText() != null)
                         oldName.setMitbewohner(Integer.parseInt(mitbewohnerEditText.getText().toString()));
-
+                    }
 
 
                     if (TextUtils.isEmpty(hobbysEditText.getText()))
@@ -361,8 +362,12 @@ public class ProfilBearbeitenActivity extends AppCompatActivity implements Popup
 
 
                     if (TextUtils.isEmpty(alterEditText.getText()))
-                        oldName.setAlter(Integer.parseInt(oldName.getAlter().toString()));
-                    else oldName.setAlter(Integer.parseInt(alterEditText.getText().toString()));
+                        oldName.setAlter(oldName.getAlter());
+                    else {
+                        if(alterEditText.getText() != null)
+                        oldName.setAlter(Integer.parseInt(alterEditText.getText().toString()));
+                    }
+
 
 
                 // if(TextUtils.isEmpty(raucherEditText.getText()))
