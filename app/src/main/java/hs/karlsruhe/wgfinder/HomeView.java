@@ -117,7 +117,7 @@ public class HomeView extends AppCompatActivity implements View.OnClickListener,
         wohnung1.setOrt("Karlsruhe");
         wohnung1.setMitbewohnerAnzahl(2);
         wohnung1.setHobbies("Feiern");
-        wohnung1.setBeschreibung("Wir als feierfreudige WG suchen einen neuen Mitbewohner, der gerne feriert.");
+        wohnung1.setBeschreibung("Wir als feierfreudige WG suchen einen neuen Mitbewohner, der gerne feiert.");
         final Wohnungen wohnung2 = new Wohnungen();
         wohnung2.setId(2);
         wohnung2.setPreis(345.00);

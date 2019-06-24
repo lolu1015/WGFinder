@@ -72,20 +72,7 @@ public class RolleAussuchen extends AppCompatActivity implements View.OnClickLis
         }
     }
     public void setRolleAnbieter(View v) {
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                emailTemp = db.tempDAO().findTemp();
-                    db.benutzerDAO().updateRole(0, emailTemp);
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(RolleAussuchen.this, "Anbieter!", Toast.LENGTH_LONG).show();
-                        }
-                    });
-                sendMessage();
-                }
-        });
+
     }
     public void setRolleSucher(View v) {
         AsyncTask.execute(new Runnable() {
