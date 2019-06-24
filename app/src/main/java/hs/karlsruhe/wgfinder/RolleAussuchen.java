@@ -34,7 +34,7 @@ public class RolleAussuchen extends AppCompatActivity implements View.OnClickLis
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.logged_in, menu);
+        getMenuInflater().inflate(R.menu.menu_rolle_aussuchen, menu);
         return true;
     }
     @Override
